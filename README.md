@@ -1,4 +1,4 @@
-# che-che4z
+# Eclipse Che4z
   
 Eclipse Che is an open-source, next-generation development platform, leveraging container technology which offers a more streamlined on-boarding process for new developers to ensure they have the tools they need. Using stacks, Eclipse Che creates a workspace which brings the necessary technology to the task at hand. More information about Che can be found here.
 
