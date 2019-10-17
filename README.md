@@ -1,6 +1,6 @@
-# Che4z Community
+# Che4z
 
-This guide will help you navigate the Che4z community, and learn more on how to contribute and provide feedback.
+This guide will help you understand more about Che4z, and learn more on how to contribute and provide feedback.
 
 ## Eclipse Che4z
   
