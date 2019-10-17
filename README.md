@@ -27,38 +27,10 @@ Current Che4z Sub-projects are:
 - z/OS Resource Explorer
 - COBOL Language Support
 
-## Che4z Community Teams
-
-Che4z has a number of cross-functional teams to support the common functions across the subprojects.
-
 ### Documentation
 
 * https://github.com/eclipse/che-docs - Che4z Documentation GitHub
 * https://www.eclipse.org/che/docs/ - Che4z documentation customer facing site
-
-## Communication Channels
-?
-
-### Slack
-?
-
-### Mailing Lists
-?
-
-### Community Forums
-?
-
-## Contribute
-?
-
-### Submit an issue
-?
-
-#### Pull Request Guidelines
-?
-
-### Reporting Security Issues
-?
 
 ## Third Party Licensing
 Eclipse Che4z uses the [Eclipse Public License v2.0](https://www.eclipse.org/legal/epl-v20.html), and the [Apache License v2.0](https://www.apache.org/licenses/LICENSE-2.0.txt) for both z/OS Resource Explorer and COBOL Language Support.
