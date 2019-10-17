@@ -10,3 +10,56 @@ Eclipse Che4z currently comprises the following components:
 - COBOL Language Support
 
 Further information can be found [here](http://www.eclipse.org/che/docs/che-7/che4z-release-information).
+
+# Che4z Community
+
+This guide will help you navigate the Che4z community, and learn more on how to contribute and provide feedback.
+
+## Che4z Sub-projects
+
+The Che4z community consists of several sub-projects that focus on specific areas of the codebase. Like any open source project, each sub-projects has it's own governance structure and release process that aligns with the primary framework guidelines.
+
+Current Che4z Sub-projects are:
+
+## Che4z Community Teams
+
+Che4z has a number of cross-functional teams to support the common functions across the subprojects.
+
+### Documentation
+
+Maintains the Che4z documentation.
+* https://github.com/eclipse/che-docs - Che4z Documentation GitHub
+* https://www.eclipse.org/che/docs/ - Che4z documentation customer facing site
+
+## Communication Channels
+
+?
+
+### Slack
+
+?
+
+### Mailing Lists
+
+?
+
+### Community Forums
+
+?
+
+## Contribute
+
+?
+
+### Submit an issue
+
+?
+
+#### Pull Request Guidelines
+
+?
+
+### Reporting Security Issues
+
+?
+
