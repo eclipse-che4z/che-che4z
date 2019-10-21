@@ -8,11 +8,6 @@ Eclipse Che is an open-source, next-generation development platform, leveraging 
 
 Eclipse Che4z’s primary goal is to bring the modern developer experience to mainframe software development. Achieving this makes on-boarding new developers in the world of mainframe simpler and easier. Che4z is extending Che capabilities to be used also for mainframe application developers working with mainframe applications.
 
-Eclipse Che4z currently comprises the following components:
-
-- z/OS Resource Explorer
-- COBOL Language Support
-
 Further information can be found [here](http://www.eclipse.org/che/docs/che-7/che4z-release-information).
 
 ## Installing Che4z
@@ -23,14 +18,7 @@ To download and install the Eclipse Che4z plugins, follow the instructions [here
 
 The Che4z community consists of several sub-projects that focus on specific areas of the codebase. Like any open source project, each sub-projects has it's own governance structure and release process that aligns with the primary framework guidelines.
 
-Current Che4z Sub-projects are:
-- z/OS Resource Explorer
-- COBOL Language Support
-
 ### Documentation
 
 * https://github.com/eclipse/che-docs - Che4z Documentation GitHub
-* https://www.eclipse.org/che/docs/ - Che4z documentation customer facing site
-
-## Third Party Licensing
-Eclipse Che4z uses the [Eclipse Public License v2.0](https://www.eclipse.org/legal/epl-v20.html), and the [Apache License v2.0](https://www.apache.org/licenses/LICENSE-2.0.txt) for both z/OS Resource Explorer and COBOL Language Support.
+* https://www.eclipse.org/che/docs/che-7/eclipse-che4z/ - Che4z documentation customer facing site
