@@ -1,0 +1,59 @@
+apiVersion: 1.0.0
+metadata:
+  name: Mainframe Basic Stack
+components:
+  - type: chePlugin
+    reference: 'https://github.com/eclipse/che-che4z/tree/1.0.0/plugins/cobol-language-support.yaml'
+    alias: cobol-language-support
+  - type: chePlugin
+    reference: 'https://github.com/eclipse/che-che4z/tree/1.0.0/plugins/cobol.yaml'
+    alias: cobol
+  - type: chePlugin
+    reference: 'https://github.com/eclipse/che-che4z/tree/1.0.0/plugins/explorer-for-endevor.yaml'
+    alias: explorer-for-endevor
+  - id: eclipse/che-theia/7.3.0
+    type: cheEditor
+  - alias: zowe-cli
+    type: kubernetes
+    mountSources: true
+    referenceContent: |
+         kind: List
+         items:
+          - 
+           apiVersion: v1
+           kind: Pod
+           metadata:
+            name: zowe
+           spec:
+            volumes:
+             - name: zowe
+               persistentVolumeClaim:
+                 claimName: zowe-claim
+            containers:
+             - 
+              image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-stack:2019-11-05T15-37-19'
+              env: 
+              - name: THEIA_PLUGINS
+                value: local-dir:///plugins
+              - name: ZOWE_CLI_HOME
+                value: /home/user/.zowe
+              name: cli
+              resources:
+               limits:
+                memory: 1024Mi
+              volumeMounts:
+               - mountPath: /projects
+                 name: projects
+               - mountPath: /home/user/.zowe
+                 name: zowe
+          -
+           apiVersion: v1
+           kind: PersistentVolumeClaim
+           metadata:
+            name: zowe-claim
+           spec:
+            accessModes:
+             - ReadWriteOnce
+            resources:
+              requests:
+                storage: 128Mi
