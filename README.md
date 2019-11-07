@@ -12,7 +12,7 @@ Further information can be found [here](http://www.eclipse.org/che/docs/che-7/ch
 
 ## Installing Che4z
 
-To download and install the Eclipse Che4z plugins, follow the instructions [here](https://projects.eclipse.org/projects/ecd.che.che4z/downloads).
+To download and install the Eclipse Che4z plugins, follow the instructions [here](https://www.eclipse.org/che/docs/che-7/che4z-installing/).
 
 ## Che4z Sub-projects
 
