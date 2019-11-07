@@ -31,7 +31,7 @@ components:
                  claimName: zowe-claim
             containers:
              - 
-              image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-stack:2019-11-05T15-37-19'
+              image: 'ca-docker-brightside-docker.bintray.io/cli-mainframe-basic-stack:2019-11-07T13-32-56'
               env: 
               - name: THEIA_PLUGINS
                 value: local-dir:///plugins
