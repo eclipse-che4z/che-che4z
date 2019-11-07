@@ -3,13 +3,13 @@ metadata:
   name: Mainframe Basic Stack
 components:
   - type: chePlugin
-    reference: 'https://github.com/eclipse/che-che4z/tree/1.0.0/plugins/cobol-language-support.yaml'
+    reference: 'https://github.com/eclipse/che-che4z/raw/1.0.0/plugins/cobol-language-support.yaml'
     alias: cobol-language-support
   - type: chePlugin
-    reference: 'https://github.com/eclipse/che-che4z/tree/1.0.0/plugins/cobol.yaml'
+    reference: 'https://github.com/eclipse/che-che4z/raw/1.0.0/plugins/cobol.yaml'
     alias: cobol
   - type: chePlugin
-    reference: 'https://github.com/eclipse/che-che4z/tree/1.0.0/plugins/explorer-for-endevor.yaml'
+    reference: 'https://github.com/eclipse/che-che4z/raw/1.0.0/plugins/explorer-for-endevor.yaml'
     alias: explorer-for-endevor
   - id: eclipse/che-theia/7.3.0
     type: cheEditor
