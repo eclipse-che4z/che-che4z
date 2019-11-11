@@ -18,6 +18,10 @@ To download and install the Eclipse Che4z plugins, follow the instructions [here
 
 The Che4z community consists of several sub-projects that focus on specific areas of the codebase. Like any open source project, each sub-projects has it's own governance structure and release process that aligns with the primary framework guidelines.
 
+### Sub-project Repositories
+* https://github.com/eclipse/che-che4z-lsp-for-cobol - COBOL Language Support GitHub
+* https://github.com/eclipse/che-che4z-explorer-for-endevor - Explorer for Endevor GitHub
+
 ### Documentation
 
 * https://github.com/eclipse/che-docs - Che4z Documentation GitHub
