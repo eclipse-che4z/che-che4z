@@ -7,7 +7,7 @@ displayName: COBOL
 title: COBOL
 description: COBOL, JCL, PL/I & DIR syntax support
 icon: https://www.eclipse.org/che/images/logo-eclipseche.svg
-repository:
+repository: https://github.com/spgennard/vscode_cobol
 category: Language
 spec:
   extensions:
