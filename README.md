@@ -1,6 +1,8 @@
 # Che4z
 
-This guide will help you understand more about Che4z, and learn more on how to contribute and provide feedback.
+Che4z is an all-in-one mainframe extension package for developers working with z/OS applications, suitable for all levels of mainframe experience, even beginners.
+
+Che4z offers mainframe application developers a modern, familiar and seamless experience, which helps to overcome some developers' reservations or concerns about the traditional mainframe user experience.
 
 ## Eclipse Che4z
   
