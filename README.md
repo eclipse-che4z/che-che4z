@@ -12,7 +12,20 @@ Further information can be found [here](http://www.eclipse.org/che/docs/che-7/ch
 
 ## Installing Che4z
 
-To download and install the Eclipse Che4z plugins, follow the instructions [here](https://www.eclipse.org/che/docs/che-7/che4z-installing/).
+The Eclipse Che4z basic stack is included with Che version 7.6 and above. Follow these instructions if you are using an older version. Eclipse Che4z is compatible with Che version 7.3 on Kubernetes.
+
+1. Log in to Che.
+
+2. In a web browser, load the following URL:  
+`++https://++__<CHE_HOST>__/f?url=https://github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml`  
+Where:
+    - `++https://++__<CHE_HOST>__` specifies the Che Server URL, for example: `++https://++my-che-server.com`.
+    - `/f?url=` links the Che Server URL to the Eclipse Che4z basic stack URL.
+    - `++https://++github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml` is the Eclipse Che4z basic stack URL.
+3. Press **Enter** and wait for the workspace to initialize.  
+A workspace is created with Eclipse Che4z extensions available.
+
+To install the Eclipse Che4z Premium stack, replace the basic stack URL with the Premium Stack URL specified in the CA Brightside PDF installation guide available from https://casupport.broadcom.com/download-center/download-center.html[Broadcom Support]. See the *Getting Started* section in the http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/getting-started.html[CA Brightside documentation].
 
 ## Che4z Sub-projects
 
