@@ -4,13 +4,13 @@ Che4z is an all-in-one mainframe extension package for developers working with z
 
 Che4z offers mainframe application developers a modern, familiar and seamless experience, which helps to overcome some developers' reservations or concerns about the traditional mainframe user experience.
 
-Eclipse Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.org/che/docs/che-7) and [Zowe](https://www.zowe.org/). Many of these extensions, and other mainframe-oriented innovations, are also available as part of the Code4z package of extensions for Visual Studio Code. 
+Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.org/che/docs/che-7) and [Zowe](https://www.zowe.org/). Many of these extensions, and other mainframe-oriented innovations, are also available as part of the Code4z package of extensions for Visual Studio Code. 
 
 ## Installing Che4z
 
-The Eclipse Che4z basic stack is included with Che version 7.6 and above. Follow these instructions if you are using an older version. Eclipse Che4z is compatible with Che version 7.3 on Kubernetes.
+The Che4z basic stack is included with Eclipse Che version 7.6 and above. Follow these instructions if you are using an older version. Che4z is compatible with Eclipse Che version 7.3 on Kubernetes.
 
-1. Log in to Che.
+1. Log in to Eclipse Che.
 
 2. In a web browser, load the following URL:  
 `++https://++__<CHE_HOST>__/f?url=https://github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml`  
@@ -25,7 +25,7 @@ To install the Eclipse Che4z premium stack, replace the basic stack URL with the
 
 ## Extensions
 
-The Eclipse Che basic stack contains the following extensions.
+The Che4z basic stack contains the COBOL Language Support, HLASM Language Support, Zowe Explorer, Explorer for Endevor and Debugger for Mainframe extensions. 
 
 ### [COBOL Language Support](https://github.com/eclipse/che-che4z-lsp-for-cobol)
 [![GitHub issues](https://img.shields.io/github/issues-raw/eclipse/che-che4z-lsp-for-cobol?style=flat-square)](https://github.com/eclipse/che-che4z-lsp-for-cobol/issues)
