@@ -21,9 +21,13 @@ Where:
 3. Press **Enter** and wait for the workspace to initialize.  
 A workspace is created with Eclipse Che4z extensions available.
 
-To install the Eclipse Che4z Premium stack, replace the basic stack URL with the Premium Stack URL specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). See the **Getting Started** section in the [CA Brightside documentation](http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/getting-started.html).
+To install the Eclipse Che4z premium stack, replace the basic stack URL with the Premium Stack URL specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). See the **Getting Started** section in the [CA Brightside documentation](http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/getting-started.html).
 
-## [COBOL Language Support](https://github.com/eclipse/che-che4z-lsp-for-cobol)
+## Extensions
+
+The Eclipse Che basic stack contains the following extensions.
+
+### [COBOL Language Support](https://github.com/eclipse/che-che4z-lsp-for-cobol)
 [![GitHub issues](https://img.shields.io/github/issues-raw/eclipse/che-che4z-lsp-for-cobol?style=flat-square)](https://github.com/eclipse/che-che4z-lsp-for-cobol/issues)
 [![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://join.slack.com/t/che4z/shared_invite/enQtNzk0MzA4NDMzOTIwLWIzMjEwMjJlOGMxNmMyNzQ1NWZlMzkxNmQ3M2VkYWNjMmE0MGQ0MjIyZmY3MTdhZThkZDg3NGNhY2FmZTEwNzQ)
 
@@ -31,13 +35,13 @@ COBOL Language Support standardizes the communication between language tooling a
 
 > How can we improve COBOL Language Support? [Let us know on our Git repository](https://github.com/eclipse/che-che4z-lsp-for-cobol/issues)
 
-### Features
+#### Features
 * Edit COBOL code with syntax highlighting, real time syntax validation, content assist and other advanced features.
 
-### Blogs
+#### Blogs
 * [Beginner’s Guide: COBOL Made Easy](https://medium.com/modern-mainframe/beginners-guide-cobol-made-easy-introduction-ecf2f611ac76)
 
-## [HLASM Language Support](https://github.com/eclipse/che-che4z-lsp-for-hlasm) 
+### [HLASM Language Support](https://github.com/eclipse/che-che4z-lsp-for-hlasm) 
 [![GitHub issues](https://img.shields.io/github/issues-raw/eclipse/che-che4z-lsp-for-hlasm?style=flat-square)](https://github.com/eclipse/che-che4z-lsp-for-hlasm/issues)
 [![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://join.slack.com/t/che4z/shared_invite/enQtNzk0MzA4NDMzOTIwLWIzMjEwMjJlOGMxNmMyNzQ1NWZlMzkxNmQ3M2VkYWNjMmE0MGQ0MjIyZmY3MTdhZThkZDg3NGNhY2FmZTEwNzQ)
 
@@ -45,11 +49,11 @@ Code completion, highlighting, browsing and validation for High Level Assembler 
 
 > How can we improve HLASM Language Support? [Let us know on our Git repository](https://github.com/eclipse/che-che4z-lsp-for-hlasm/issues)
 
-### Features
+#### Features
 * Edit HLASM code with syntax highlighting, real time syntax validation, content assist and other advanced features.
 * Trace HLASM macros.
 
-## [Zowe Explorer](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe) 
+### [Zowe Explorer](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe) 
 [![GitHub issues](https://img.shields.io/github/issues-raw/zowe/vscode-extension-for-zowe?style=flat-square)](https://github.com/zowe/vscode-extension-for-zowe/issues)
 [![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://openmainframeproject.slack.com/)
 
@@ -57,16 +61,16 @@ Zowe Explorer is an Eclipse Che extension powered by Zowe CLI that streamlines i
 
 > How can we improve Zowe Explorer? [Let us know on our Git repository](https://github.com/zowe/vscode-extension-for-zowe/issues)
 
-### Features
+#### Features
 * Access z/OS Datasets and z/OS Unix file systems and submit JCLs.
 * View and download job output.
 * Issue TSO commands.
 
-### Blogs
+#### Blogs
 * [Beginner’s Guide: How to access mainframe via Zowe in 10 easy steps](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe)
 * [Zowe blog](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe)
 
-## [Explorer for Endevor](https://github.com/eclipse/che-che4z-explorer-for-endevor)
+### [Explorer for Endevor](https://github.com/eclipse/che-che4z-explorer-for-endevor)
 [![GitHub issues](https://img.shields.io/github/issues-raw/eclipse/che-che4z-explorer-for-endevor?style=flat-square)](https://github.com/eclipse/che-che4z-explorer-for-endevor/issues)
 [![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://join.slack.com/t/che4z/shared_invite/enQtNzk0MzA4NDMzOTIwLWIzMjEwMjJlOGMxNmMyNzQ1NWZlMzkxNmQ3M2VkYWNjMmE0MGQ0MjIyZmY3MTdhZThkZDg3NGNhY2FmZTEwNzQ)
 
@@ -76,10 +80,10 @@ It offers the best developer experience in synergy with [Bridge for Git](https:/
 
 > How can we improve Explorer for Endevor? [Let us know on our Git repository](https://github.com/eclipse/che-che4z-explorer-for-endevor/issues)
 
-### Features
+#### Features
 * Retrieve, browse and search CA Endevor® elements.
 
-## [Debugger for Mainframe](http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-intertest-and-ca-symdump/11-0/DAP-For-Intertest-Debugger.html)
+### [Debugger for Mainframe](http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-intertest-and-ca-symdump/11-0/DAP-For-Intertest-Debugger.html)
 [![GitHub issues](https://img.shields.io/github/issues-raw/broadcomMFD/debugger-for-mainframe?style=flat-square)](https://github.com/BroadcomMFD/debugger-for-mainframe/issues)
 [![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://join.slack.com/t/che4z/shared_invite/enQtNzk0MzA4NDMzOTIwLWIzMjEwMjJlOGMxNmMyNzQ1NWZlMzkxNmQ3M2VkYWNjMmE0MGQ0MjIyZmY3MTdhZThkZDg3NGNhY2FmZTEwNzQ)
 
@@ -87,6 +91,6 @@ Debugger for Mainframe provides the debugging interface to [CA InterTest™ for 
 
 > How can we improve Debugger for Mainframe? [Let us know on our Git repository](https://github.com/BroadcomMFD/debugger-for-mainframe/issues)
 
-### Features
+#### Features
 
 * Debug COBOL code for applications running in a CICS region.
