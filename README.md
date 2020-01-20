@@ -1,28 +1,98 @@
 # Che4z
 
-This guide will help you understand more about Che4z, and learn more on how to contribute and provide feedback.
+Che4z is an all-in-one mainframe extension package for developers working with z/OS applications, suitable for all levels of mainframe experience, even beginners.
 
-## Eclipse Che4z
-  
-Eclipse Che is an open-source, next-generation development platform, leveraging container technology which offers a more streamlined on-boarding process for new developers to ensure they have the tools they need. Using stacks, Eclipse Che creates a workspace which brings the necessary technology to the task at hand. More information about Che can be found here.
+Che4z offers mainframe application developers a modern, familiar and seamless experience, which helps to overcome some developers' reservations or concerns about the traditional mainframe user experience.
 
-Eclipse Che4z’s primary goal is to bring the modern developer experience to mainframe software development. Achieving this makes on-boarding new developers in the world of mainframe simpler and easier. Che4z is extending Che capabilities to be used also for mainframe application developers working with mainframe applications.
-
-Further information can be found [here](http://www.eclipse.org/che/docs/che-7/che4z-release-information).
+Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.org/che/docs/che-7) and [Zowe](https://www.zowe.org/). Many of these extensions, and other mainframe-oriented innovations, are also available as part of the Code4z package of extensions for Visual Studio Code. 
 
 ## Installing Che4z
 
-To download and install the Eclipse Che4z plugins, follow the instructions [here](https://www.eclipse.org/che/docs/che-7/che4z-installing/).
+The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so no installation is necessary. To get started, create a new workspace, and select the **Mainframe Basic Stack**.
 
-## Che4z Sub-projects
+If you are using an earlier version, follow the instructions below. Che4z is compatible with Eclipse Che version 7.3 on Kubernetes or later.
 
-The Che4z community consists of several sub-projects that focus on specific areas of the codebase. Like any open source project, each sub-projects has it's own governance structure and release process that aligns with the primary framework guidelines.
+1. Log in to Eclipse Che.
 
-### Sub-project Repositories
-* https://github.com/eclipse/che-che4z-lsp-for-cobol - COBOL Language Support GitHub
-* https://github.com/eclipse/che-che4z-explorer-for-endevor - Explorer for Endevor GitHub
+2. In a web browser, load the following URL:  
+`++https://++__<CHE_HOST>__/f?url=https://github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml`  
+Where:
+    - `++https://++__<CHE_HOST>__` specifies the Che Server URL, for example: `++https://++my-che-server.com`.
+    - `/f?url=` links the Che Server URL to the Eclipse Che4z basic stack URL.
+    - `++https://++github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml` is the Eclipse Che4z basic stack URL.
+3. Press **Enter** and wait for the workspace to initialize.  
+A workspace is created with Eclipse Che4z extensions available.
 
-### Documentation
+To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/eclipse-che4z.html), replace the basic stack URL with the premium stack URL specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). See the **Getting Started** section in the [CA Brightside documentation](http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/getting-started.html).
 
-* https://github.com/eclipse/che-docs - Che4z Documentation GitHub
-* https://www.eclipse.org/che/docs/che-7/eclipse-che4z/ - Che4z documentation customer facing site
+## Extensions
+
+The Che4z basic stack contains the COBOL Language Support, HLASM Language Support, Zowe Explorer, Explorer for Endevor and Debugger for Mainframe extensions. 
+
+### [COBOL Language Support](https://github.com/eclipse/che-che4z-lsp-for-cobol)
+[![GitHub issues](https://img.shields.io/github/issues-raw/eclipse/che-che4z-lsp-for-cobol?style=flat-square)](https://github.com/eclipse/che-che4z-lsp-for-cobol/issues)
+[![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://join.slack.com/t/che4z/shared_invite/enQtNzk0MzA4NDMzOTIwLWIzMjEwMjJlOGMxNmMyNzQ1NWZlMzkxNmQ3M2VkYWNjMmE0MGQ0MjIyZmY3MTdhZThkZDg3NGNhY2FmZTEwNzQ)
+
+COBOL Language Support standardizes the communication between language tooling and your code editor using the Language Server Protocol (LSP).
+
+> How can we improve COBOL Language Support? [Let us know on our Git repository](https://github.com/eclipse/che-che4z-lsp-for-cobol/issues)
+
+#### Features
+* Edit COBOL code with syntax highlighting, real time syntax validation, content assist and other advanced features.
+
+#### Blogs
+* [Beginner’s Guide: COBOL Made Easy](https://medium.com/modern-mainframe/beginners-guide-cobol-made-easy-introduction-ecf2f611ac76)
+
+### [HLASM Language Support](https://github.com/eclipse/che-che4z-lsp-for-hlasm) 
+[![GitHub issues](https://img.shields.io/github/issues-raw/eclipse/che-che4z-lsp-for-hlasm?style=flat-square)](https://github.com/eclipse/che-che4z-lsp-for-hlasm/issues)
+[![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://join.slack.com/t/che4z/shared_invite/enQtNzk0MzA4NDMzOTIwLWIzMjEwMjJlOGMxNmMyNzQ1NWZlMzkxNmQ3M2VkYWNjMmE0MGQ0MjIyZmY3MTdhZThkZDg3NGNhY2FmZTEwNzQ)
+
+Code completion, highlighting, browsing and validation for High Level Assembler language.
+
+> How can we improve HLASM Language Support? [Let us know on our Git repository](https://github.com/eclipse/che-che4z-lsp-for-hlasm/issues)
+
+#### Features
+* Edit HLASM code with syntax highlighting, real time syntax validation, content assist and other advanced features.
+* Trace HLASM macros.
+
+### [Zowe Explorer](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe) 
+[![GitHub issues](https://img.shields.io/github/issues-raw/zowe/vscode-extension-for-zowe?style=flat-square)](https://github.com/zowe/vscode-extension-for-zowe/issues)
+[![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://openmainframeproject.slack.com/)
+
+Zowe Explorer is an Eclipse Che extension powered by Zowe CLI that streamlines interaction with mainframe data sets, USS files, and jobs.
+
+> How can we improve Zowe Explorer? [Let us know on our Git repository](https://github.com/zowe/vscode-extension-for-zowe/issues)
+
+#### Features
+* Access z/OS Datasets and z/OS Unix file systems and submit JCLs.
+* View and download job output.
+* Issue TSO commands.
+
+#### Blogs
+* [Beginner’s Guide: How to access mainframe via Zowe in 10 easy steps](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe)
+* [Zowe blog](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe)
+
+### [Explorer for Endevor](https://github.com/eclipse/che-che4z-explorer-for-endevor)
+[![GitHub issues](https://img.shields.io/github/issues-raw/eclipse/che-che4z-explorer-for-endevor?style=flat-square)](https://github.com/eclipse/che-che4z-explorer-for-endevor/issues)
+[![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://join.slack.com/t/che4z/shared_invite/enQtNzk0MzA4NDMzOTIwLWIzMjEwMjJlOGMxNmMyNzQ1NWZlMzkxNmQ3M2VkYWNjMmE0MGQ0MjIyZmY3MTdhZThkZDg3NGNhY2FmZTEwNzQ)
+
+Explorer for Endevor gives you the ability to Browse and Retrieve [CA Endevor® SCM](https://www.broadcom.com/products/mainframe/devops-app-development/app/endevor-software-change-manager) elements using a user-friendly, intuitive interface.
+
+It offers the best developer experience in synergy with [Bridge for Git](https://youtu.be/sjnZuQpUVM4), a solution which enables you to concurrently work in Git and mainframe.
+
+> How can we improve Explorer for Endevor? [Let us know on our Git repository](https://github.com/eclipse/che-che4z-explorer-for-endevor/issues)
+
+#### Features
+* Retrieve, browse and search CA Endevor® elements.
+
+### [Debugger for Mainframe](http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-intertest-and-ca-symdump/11-0/DAP-For-Intertest-Debugger.html)
+[![GitHub issues](https://img.shields.io/github/issues-raw/broadcomMFD/debugger-for-mainframe?style=flat-square)](https://github.com/BroadcomMFD/debugger-for-mainframe/issues)
+[![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://join.slack.com/t/che4z/shared_invite/enQtNzk0MzA4NDMzOTIwLWIzMjEwMjJlOGMxNmMyNzQ1NWZlMzkxNmQ3M2VkYWNjMmE0MGQ0MjIyZmY3MTdhZThkZDg3NGNhY2FmZTEwNzQ)
+
+Debugger for Mainframe provides the debugging interface to [CA InterTest™ for CICS](https://www.broadcom.com/products/mainframe/devops-app-development/testing-quality/intertest-cics). This extension provides a modern debug experience for COBOL applications running in a CICS region.
+
+> How can we improve Debugger for Mainframe? [Let us know on our Git repository](https://github.com/BroadcomMFD/debugger-for-mainframe/issues)
+
+#### Features
+
+* Debug COBOL code for applications running in a CICS region.
