@@ -15,11 +15,11 @@ If you are using an earlier version, follow the instructions below. Che4z is com
 1. Log in to Eclipse Che.
 
 2. In a web browser, load the following URL:  
-`++https://++__<CHE_HOST>__/f?url=https://github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml`  
+`https://__<CHE_HOST>__/f?url=https://github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml`  
 Where:
-    - `++https://++__<CHE_HOST>__` specifies the Che Server URL, for example: `++https://++my-che-server.com`.
+    - `https://__<CHE_HOST>__` specifies the Che Server URL, for example: `https://my-che-server.com`.
     - `/f?url=` links the Che Server URL to the Eclipse Che4z basic stack URL.
-    - `++https://++github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml` is the Eclipse Che4z basic stack URL.
+    - `https://github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml` is the Eclipse Che4z basic stack URL.
 3. Press **Enter** and wait for the workspace to initialize.  
 A workspace is created with Eclipse Che4z extensions available.
 
