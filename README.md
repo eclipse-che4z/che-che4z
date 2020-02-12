@@ -8,24 +8,9 @@ Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.o
 
 ## Installing Che4z
 
-### Basic Stack (Che v7.6.0 and higher)
+### Basic Stack
 
 The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so no installation is necessary. To get started, create a new workspace, and select the **Mainframe Basic Stack**.
-
-### Basic Stack (Che v7.3.0)
-
-If you are using an earlier version, follow the instructions below. Che4z is compatible with Eclipse Che version 7.3 on Kubernetes or later.
-
-1. Log in to Eclipse Che.
-
-2. In a web browser, load the following URL:  
-`https://__<CHE_HOST>__/f?url=https://github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml`  
-Where:
-    - `https://__<CHE_HOST>__` specifies the Che Server URL, for example: `https://my-che-server.com`.
-    - `/f?url=` links the Che Server URL to the Eclipse Che4z basic stack URL.
-    - `https://github.com/eclipse/che-che4z/raw/1.0.0/mainframe-basic-stack.yaml` is the Eclipse Che4z basic stack URL.
-3. Press **Enter** and wait for the workspace to initialize.  
-A workspace is created with Eclipse Che4z extensions available.
 
 ### Premium Stack
 
