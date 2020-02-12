@@ -10,7 +10,7 @@ Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.o
 
 ### Basic Stack
 
-The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so no installation is necessary. To get started, create a new workspace, and select the **Mainframe Basic Stack**.
+The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so no installation is necessary. To get started, create a new workspace and select the **Mainframe Basic Stack**.
 
 ### Premium Stack
 
