@@ -6,6 +6,9 @@ Che4z offers mainframe application developers a modern, familiar and seamless ex
 
 Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.org/che/docs/che-7) and [Zowe](https://www.zowe.org/). Many of these extensions, and other mainframe-oriented innovations, are also available as part of the [Code4z](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.code4z-extension-pack) package of extensions for Visual Studio Code. 
 
+[![Eclipse Che - Eclipse Next-Generation IDE](/roadmap.png)](
+https://www.eclipse.org/che/)
+
 ## Installing Che4z
 
 ### Basic Stack
