@@ -8,9 +8,14 @@ Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.o
 
 ## Installing Che4z
 
-The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so no installation is necessary. To get started, create a new workspace, and select the **Mainframe Basic Stack**.
 
-If you are using an earlier version, follow the instructions below. Che4z is compatible with Eclipse Che version 7.3 on Kubernetes or later.
+### Basic Stack
+
+The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so no installation is necessary. To get started, create a new workspace and select the **Mainframe Basic Stack**.
+
+### Premium Stack
+
+To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/eclipse-che4z.html), **follow these steps**: 
 
 1. Log in to Eclipse Che.
 
