@@ -15,7 +15,7 @@ The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so n
 
 ### Premium Stack
 
-To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/eclipse-che4z.html), **follow these steps**: 
+To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/eclipse-che4z.html), **follow these steps**: 
 
 1. Log in to Eclipse Che.
 
@@ -24,7 +24,7 @@ To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broad
 Where:
     - `https://__<CHE_HOST>__` specifies the Che Server URL, for example: `https://my-che-server.com`.
     - `/f?url=` links the Che Server URL to the registry URL.
-    - `<REGISTRY_URL>` is the Eclipse Che4z premium stack URL, which is specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). For more information, see the **Getting Started** section in the [CA Brightside documentation](http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/getting-started.html).
+    - `<REGISTRY_URL>` is the Eclipse Che4z premium stack URL, which is specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). For more information, see the **Getting Started** section in the [CA Brightside documentation](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/getting-started.html).
     
 3. Press **Enter** and wait for the workspace to initialize.  
 A workspace is created with Eclipse Che4z extensions available.
