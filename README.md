@@ -25,7 +25,7 @@ To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broad
 
 4. In the **URL** field, paste the Eclipse Che4z premium stack URL, which is specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). For more information, see the **Getting Started** section in the [CA Brightside documentation](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/getting-started.html).
     
-5. Press **Create & Open** and wait for the workspace to initialize.  
+5. Click **Create & Open** and wait for the workspace to initialize.  
 A workspace is created with Eclipse Che4z extensions available.
 
 ## Extensions
