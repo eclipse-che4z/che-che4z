@@ -19,14 +19,13 @@ To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broad
 
 1. Log in to Eclipse Che.
 
-2. In a web browser, load the following URL:  
-`https://__<CHE_HOST>__/f?url=<REGISTRY_URL>`  
-Where:
-    - `https://__<CHE_HOST>__` specifies the Che Server URL, for example: `https://my-che-server.com`.
-    - `/f?url=` links the Che Server URL to the registry URL.
-    - `<REGISTRY_URL>` is the Eclipse Che4z premium stack URL, which is specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). For more information, see the **Getting Started** section in the [CA Brightside documentation](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/getting-started.html).
+2. In **Workspaces**, click **Import Devfile**.
+
+3. Next to **Source**, select **URL**.
+
+4. In the **URL** field, paste the Eclipse Che4z premium stack URL, which is specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). For more information, see the **Getting Started** section in the [CA Brightside documentation](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/getting-started.html).
     
-3. Press **Enter** and wait for the workspace to initialize.  
+5. Click **Create & Open** and wait for the workspace to initialize.  
 A workspace is created with Eclipse Che4z extensions available.
 
 ## Extensions
