@@ -72,8 +72,7 @@ Zowe Explorer is an Eclipse Che extension powered by Zowe CLI that streamlines i
 * Issue TSO commands.
 
 #### Blogs
-* [Beginner’s Guide: How to access mainframe via Zowe in 10 easy steps](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe)
-* [Zowe blog](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe)
+* [Beginner’s Guide: How to access mainframe via Zowe in 10 easy steps](https://medium.com/zowe/beginners-guide-how-to-access-mainframe-via-zowe-in-10-easy-steps-fbec14ed6ed2)
 
 ### [Explorer for Endevor](https://github.com/eclipse/che-che4z-explorer-for-endevor)
 [![GitHub issues](https://img.shields.io/github/issues-raw/eclipse/che-che4z-explorer-for-endevor?style=flat-square)](https://github.com/eclipse/che-che4z-explorer-for-endevor/issues)
