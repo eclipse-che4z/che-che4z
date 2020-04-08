@@ -4,9 +4,10 @@ Che4z is an all-in-one mainframe extension package for developers working with z
 
 Che4z offers mainframe application developers a modern, familiar and seamless experience, which helps to overcome some developers' reservations or concerns about the traditional mainframe user experience.
 
-Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.org/che/docs/che-7) and [Zowe](https://www.zowe.org/). Many of these extensions, and other mainframe-oriented innovations, are also available as part of the [Code4z](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.code4z-extension-pack) package of extensions for Visual Studio Code. 
+Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.org/che/docs/che-7) and [Zowe](https://www.zowe.org/). Many of these extensions, and other mainframe-oriented innovations, are also available as part of the Code4z package of extensions for Visual Studio Code. 
 
 ## Installing Che4z
+
 
 ### Basic Stack
 
@@ -14,18 +15,17 @@ The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so n
 
 ### Premium Stack
 
-To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/eclipse-che4z.html), **follow these steps**: 
+To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/eclipse-che4z.html), **follow these steps**: 
 
 1. Log in to Eclipse Che.
 
-2. In a web browser, load the following URL:  
-`https://__<CHE_HOST>__/f?url=<REGISTRY_URL>`  
-Where:
-    - `https://__<CHE_HOST>__` specifies the Che Server URL, for example: `https://my-che-server.com`.
-    - `/f?url=` links the Che Server URL to the registry URL.
-    - `<REGISTRY_URL>` is the Eclipse Che4z premium stack URL, which is specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). For more information, see the **Getting Started** section in the [CA Brightside documentation](http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside-enterprise/2-0/getting-started.html).
+2. In **Workspaces**, click **Import Devfile**.
+
+3. Next to **Source**, select **URL**.
+
+4. In the **URL** field, paste the Eclipse Che4z premium stack URL, which is specified in the CA Brightside PDF installation guide available from [Broadcom Support](https://casupport.broadcom.com/download-center/download-center.html). For more information, see the **Getting Started** section in the [CA Brightside documentation](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/getting-started.html).
     
-3. Press **Enter** and wait for the workspace to initialize.  
+5. Click **Create & Open** and wait for the workspace to initialize.  
 A workspace is created with Eclipse Che4z extensions available.
 
 ## Extensions
@@ -72,8 +72,8 @@ Zowe Explorer is an Eclipse Che extension powered by Zowe CLI that streamlines i
 * Issue TSO commands.
 
 #### Blogs
-* [Beginner’s Guide: How to access mainframe via Zowe in 10 easy steps](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe)
-* [Zowe blog](https://marketplace.visualstudio.com/items?itemName=Zowe.vscode-extension-for-zowe)
+* [Beginner’s Guide: How to access mainframe via Zowe in 10 easy steps](https://medium.com/zowe/beginners-guide-how-to-access-mainframe-via-zowe-in-10-easy-steps-fbec14ed6ed2)
+* [Zowe blog](https://medium.com/zowe)
 
 ### [Explorer for Endevor](https://github.com/eclipse/che-che4z-explorer-for-endevor)
 [![GitHub issues](https://img.shields.io/github/issues-raw/eclipse/che-che4z-explorer-for-endevor?style=flat-square)](https://github.com/eclipse/che-che4z-explorer-for-endevor/issues)
@@ -88,7 +88,7 @@ It offers the best developer experience in synergy with [Bridge for Git](https:/
 #### Features
 * Retrieve, browse and search CA Endevor® elements.
 
-### [Debugger for Mainframe](http://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-intertest-and-ca-symdump/11-0/DAP-For-Intertest-Debugger.html)
+### [Debugger for Mainframe](https://github.com/BroadcomMFD/debugger-for-mainframe)
 [![GitHub issues](https://img.shields.io/github/issues-raw/broadcomMFD/debugger-for-mainframe?style=flat-square)](https://github.com/BroadcomMFD/debugger-for-mainframe/issues)
 [![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://join.slack.com/t/che4z/shared_invite/enQtNzk0MzA4NDMzOTIwLWIzMjEwMjJlOGMxNmMyNzQ1NWZlMzkxNmQ3M2VkYWNjMmE0MGQ0MjIyZmY3MTdhZThkZDg3NGNhY2FmZTEwNzQ)
 
