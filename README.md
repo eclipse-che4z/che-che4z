@@ -42,7 +42,7 @@ A workspace is created with Eclipse Che4z extensions available.
 
 ### Check Extension Requirements
 
-After you launch your stack, ensure you meet the prerequisites of the individual extensions that you want to use. Explorer for Endevor requires access to CA Endevor® SCM, and Debugger for Mainframe requires access to CA InterTest™ for CICS. To find out more about each extension's requirements, click the headers below to navigate to their user documentation.
+After you launch your stack, ensure you meet the prerequisites of the individual extensions that you want to use. Explorer for Endevor requires access to CA Endevor® SCM, and Debugger for Mainframe requires access to CA InterTest™ for CICS. To find out more about each extension's requirements, click the headers below to navigate to their user documentation spaces.
 
 ## Extensions
 
