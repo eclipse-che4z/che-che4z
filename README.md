@@ -8,7 +8,7 @@ Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.o
 
 ## Getting Started
 
-Before you start using Che4z, ensure you have access to an instance of Eclipse Che.
+Before you start using Che4z, ensure you have access to an instance of Eclipse Che. 
 
 ### Launch the Basic Stack
 
@@ -25,7 +25,7 @@ A workspace is created with Eclipse Che4z extensions available.
 
 ### Launch the Premium Stack
 
-To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/eclipse-che4z.html), **follow these steps**: 
+The Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/eclipse-che4z.html) is distributed as part of CA Brightside. To install the Che4z premium stack, **follow these steps**: 
 
 1. Log in to Eclipse Che.
 
