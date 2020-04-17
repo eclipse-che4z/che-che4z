@@ -6,16 +6,26 @@ Che4z offers mainframe application developers a modern, familiar and seamless ex
 
 Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.org/che/docs/che-7) and [Zowe](https://www.zowe.org/). Many of these extensions, and other mainframe-oriented innovations, are also available as part of the Code4z package of extensions for Visual Studio Code. 
 
-## Installing Che4z
+## Getting Started
 
+Before you start using Che4z, ensure you have access to an instance of Eclipse Che. 
 
-### Basic Stack
+### Launch the Basic Stack
 
-The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so no installation is necessary. To get started, create a new workspace and select the **Mainframe Basic Stack**.
+The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so no installation is necessary. To get started, **follow these steps:** 
 
-### Premium Stack
+1. Log in to Eclipse Che.
 
-To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/eclipse-che4z.html), **follow these steps**: 
+2. In **Workspaces**, click **Add Workspace**.
+
+3. Under **Select Stack**, select the **Mainframe Basic Stack**.
+
+4. Click **Create & Open** and wait for the workspace to initialize.  
+A workspace is created with Eclipse Che4z extensions available.
+
+### Launch the Premium Stack
+
+The Che4z [premium stack](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-mainframe-software/devops/ca-brightside/3-0/eclipse-che4z.html) is distributed as part of CA Brightside. To install the Che4z premium stack, **follow these steps**: 
 
 1. Log in to Eclipse Che.
 
@@ -29,6 +39,10 @@ To install the Che4z [premium stack](https://techdocs.broadcom.com/content/broad
     
 6. Click **Create & Open** and wait for the workspace to initialize.  
 A workspace is created with Eclipse Che4z extensions available.
+
+### Check Extension Requirements
+
+After you launch your stack, ensure you meet the prerequisites of the individual extensions that you want to use. Explorer for Endevor requires access to CA Endevor® SCM, and Debugger for Mainframe requires access to CA InterTest™ for CICS. To find out more about each extension's requirements, click the headers below to navigate to their user documentation spaces.
 
 ## Extensions
 
