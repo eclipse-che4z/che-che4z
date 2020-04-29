@@ -58,6 +58,7 @@ COBOL Language Support standardizes the communication between language tooling a
 
 #### Features
 * Edit COBOL code with syntax highlighting, real time syntax validation, content assist and other advanced features.
+* Automatic retrieval of copybooks from the mainframe.
 
 #### Blogs
 * [Beginner’s Guide: COBOL Made Easy](https://medium.com/modern-mainframe/beginners-guide-cobol-made-easy-introduction-ecf2f611ac76)
