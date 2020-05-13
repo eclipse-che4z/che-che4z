@@ -5,7 +5,8 @@ This file includes the major changes to the Eclipse Che4z Basic and Premium stac
 - Zowe Explorer is now compatible with Eclipse Che v7.11.
 - Zowe CLI profiles can now be accessed by CLI plugins and other extensions simultaneously.
 - CA Secure Credential Store plug-in for Zowe CLI temporarily removed from the premium stack pending a bug fix.
-- Updated versions of components added.
+- Debugger for Mainframe updated to version 1.1.
+- COBOL Language Support updated to version 0.11.1.
 
 ## [1.2.0] 2020-03-03
 
