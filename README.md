@@ -85,7 +85,7 @@ You can learn more about the Zowe Explorer by watching the [Getting Started](htt
 
 > How can we improve Zowe Explorer? [Let us know on our Git repository](https://github.com/zowe/vscode-extension-for-zowe/issues)
 
-### Features
+#### Features
 * Access z/OS Datasets and z/OS Unix file systems, and submit JCLs.
 * Create, edit, and work with z/OSMF compatible profiles.
 * Store your credentials securely with Secure Credentials Store plug-in.
@@ -93,7 +93,7 @@ You can learn more about the Zowe Explorer by watching the [Getting Started](htt
 * Issue TSO commands.
 * Install additional extensions.
 
-### Blogs
+#### Blogs
 * [Beginner’s Guide: How to access mainframe via Zowe in 10 easy steps](https://medium.com/zowe/beginners-guide-how-to-access-mainframe-via-zowe-in-10-easy-steps-fbec14ed6ed2)
 * [Zowe blog](https://medium.com/zowe)
 
