@@ -79,14 +79,19 @@ Code completion, highlighting, browsing and validation for High Level Assembler 
 [![GitHub issues](https://img.shields.io/github/issues-raw/zowe/vscode-extension-for-zowe?style=flat-square)](https://github.com/zowe/vscode-extension-for-zowe/issues)
 [![slack](https://img.shields.io/badge/chat-on%20Slack-blue?style=flat-square)](https://openmainframeproject.slack.com/)
 
-Zowe Explorer is an Eclipse Che extension powered by Zowe CLI that streamlines interaction with mainframe data sets, USS files, and jobs.
+Zowe Explorer is an extension powered by Zowe CLI that streamlines interaction with mainframe data sets, USS files, and jobs. The extension is designed to function along with other extensions and plug-ins to deliver a richer experience.
+
+You can learn more about the Zowe Explorer by watching the [Getting Started](https://www.youtube.com/embed/G_WCsFZIWt4) and [Work with Data Sets](https://www.youtube.com/embed/X4oSHrI4oN4) tutorial videos.
 
 > How can we improve Zowe Explorer? [Let us know on our Git repository](https://github.com/zowe/vscode-extension-for-zowe/issues)
 
 #### Features
-* Access z/OS Datasets and z/OS Unix file systems and submit JCLs.
+* Access z/OS Datasets and z/OS Unix file systems, and submit JCLs.
+* Create, edit, and work with z/OSMF compatible profiles.
+* Store your credentials securely with Secure Credentials Store plug-in.
 * View and download job output.
 * Issue TSO commands.
+* Install additional extensions.
 
 #### Blogs
 * [Beginner’s Guide: How to access mainframe via Zowe in 10 easy steps](https://medium.com/zowe/beginners-guide-how-to-access-mainframe-via-zowe-in-10-easy-steps-fbec14ed6ed2)
