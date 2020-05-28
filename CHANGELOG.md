@@ -1,6 +1,6 @@
 This file includes the major changes to the Eclipse Che4z Basic and Premium stacks.
 
-## [2.0] 2020-05-28
+## [2.0] 2020-05-XX
 
 - Zowe Explorer is now compatible with Eclipse Che v7.11.
 - Zowe CLI profiles can now be accessed by CLI plugins and other extensions simultaneously.
