@@ -14,10 +14,10 @@ https://www.eclipse.org/che/)
 </div>
 ---
 
-- [**Getting Started**](#getting-started)
+- [**Getting Started with Che4z**](#getting-started)
 - [**Installing Che4z**](#using-eclipse-che)
 - [**Feedback and Community**](#feedback-and-community)
-- [**Contributing**](#contributing)
+- [**Start Contributing!**](#contributing)
 - [**Roadmap**](#roadmap)
 - [**License**](#license)
 
