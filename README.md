@@ -12,7 +12,18 @@ Che4z is powered by the open-source projects [Eclipse Che](https://www.eclipse.o
 https://www.eclipse.org/che/)
 
 </div>
+---
 
+**Visit website at: https://www.eclipse.org/che/** and documentation at: https://www.eclipse.org/che/docs
+
+- [**Getting Started**](#getting-started)
+- [**Installing Che4z**](#using-eclipse-che)
+- [**Feedback and Community**](#feedback-and-community)
+- [**Contributing**](#contributing)
+- [**Roadmap**](#roadmap)
+- [**License**](#license)
+
+---
 ## Installing Che4z
 
 ### Basic Stack
