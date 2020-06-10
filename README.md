@@ -14,8 +14,6 @@ https://www.eclipse.org/che/)
 </div>
 ---
 
-**Visit website at: https://www.eclipse.org/che/** and documentation at: https://www.eclipse.org/che/docs
-
 - [**Getting Started**](#getting-started)
 - [**Installing Che4z**](#using-eclipse-che)
 - [**Feedback and Community**](#feedback-and-community)
@@ -24,6 +22,7 @@ https://www.eclipse.org/che/)
 - [**License**](#license)
 
 ---
+
 ## Installing Che4z
 
 ### Basic Stack
