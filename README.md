@@ -121,3 +121,4 @@ Debugger for Mainframe provides the debugging interface to [CA InterTest™ for 
 #### Features
 
 * Debug COBOL code for applications running in a CICS region.
+* Debug COBOL code for Batch applications.
