@@ -4,6 +4,8 @@ This file includes the major changes to the Eclipse Che4z Basic and Premium stac
 
 - Zowe Explorer updated to version 1.11.0
 - Explorer for Endevor updated to version 1.11.1. ([Changelog](https://github.com/eclipse/che-che4z-explorer-for-endevor/blob/master/CHANGELOG.md)).
+- COBOL Language Support updated to version 0.16.1 ([Changelog](https://github.com/eclipse/che-che4z-lsp-for-cobol/blob/development/CHANGELOG.md)).
+- Debugger for Mainframe updated to version 1.3.1 ([Changelog](https://github.com/BroadcomMFD/debugger-for-mainframe/blob/master/CHANGELOG.md)).
 
 
 ## [2.1] 2020-08-21
