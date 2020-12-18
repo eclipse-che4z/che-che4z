@@ -1,5 +1,11 @@
 This file includes the major changes to the Eclipse Che4z Basic and Premium stacks.
 
+## [2.2] 2020-12-18
+
+- Zowe Explorer updated to version 1.11.0
+- Explorer for Endevor updated to version 1.11.1. ([Changelog](https://github.com/eclipse/che-che4z-explorer-for-endevor/blob/master/CHANGELOG.md)).
+
+
 ## [2.1] 2020-08-21
 
 - Zowe Explorer updated to version 1.8.0
