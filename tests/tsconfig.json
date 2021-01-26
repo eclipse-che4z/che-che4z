@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true,
+    "module": "CommonJS",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "target": "ES6",
+    "lib": ["ES6", "DOM"],
+    "types": ["cypress"]
+  },
+  "include": ["src/**/*.ts", "./node_modules/cypress"],
+  "exclude": ["dist", "node_modules"]
+}
