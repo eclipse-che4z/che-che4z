@@ -31,7 +31,7 @@ Cypress.Commands.add('waitForAppStart', () => {
   cy.get('#theia-main-content-panel', {
     timeout: Cypress.env('appStarTimeout'),
   });
-  cy.get('div.theia-preload').should('not.be.visible', {
+  cy.get('div.theia-preload').should('not.exist', {
     timeout: Cypress.env('appStartTimeout'),
   });
   cy.get('.left.area .element .fa-spin').should('not.exist', {
