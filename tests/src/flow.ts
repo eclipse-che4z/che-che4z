@@ -16,8 +16,8 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference types="cypress-iframe" />
 
-import 'cypress-iframe';
-import 'cypress-xpath';
+require('cypress-iframe');
+require('cypress-xpath');
 
 /* eslint-disable @typescript-eslint/no-namespace */
 
@@ -89,6 +89,7 @@ Cypress.Commands.add('generateAndClickCobolControlFlow', (filename: string, para
   cy.get('.theia-notification-list').contains(`Loading control flow of ${filename}`);
   //@ts-ignore
   cy.loadFlowIframe()
+    //@ts-ignore
     .xpath('//*[name()="svg"][@class="svg-chart-container"]')
     .click()
     .xpath(xpath_paragraph + '/../..')
