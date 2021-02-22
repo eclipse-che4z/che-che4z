@@ -17,10 +17,10 @@
 
 /// <reference types="cypress" />
 
-import { USER, PASS, CICSAPPLID, INTERTESTPORT, CONVJCL, ORIGJCL } from './cypressEnv';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { USER, PASS, CICSAPPLID, INTERTESTPORT, CONVJCL, ORIGJCL } = require('./cypressEnv');
 
-//@ts-ignore
-const rawTypeString = (str) => str.replace(/{/g, '{{}'); // Types the literal { key
+const rawTypeString = (str: string) => str.replace(/{/g, '{{}'); // Types the literal { key
 
 declare namespace Cypress {
   interface Chainable<Subject> {
