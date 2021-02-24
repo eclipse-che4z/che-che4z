@@ -691,3 +691,133 @@ Cypress.Commands.add('checkVariableValueSecondLevel', (var1, var2, numb) => {
   cy.get('@variablePanel').contains(var1).click().wait(500);
   cy.get(`.theia-debug-console-variable [title="${var2}"]`).siblings().should('contain', numb);
 });
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Run /trace command in debug console
+     *
+     * @example cy.theiaTrace()
+     */
+    theiaTrace(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('theiaTrace', () => {
+  cy.get('.p-Widget .theia-console-input').type('/trace{enter}');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Gain output from debug comsole after running some debug command
+     *
+     * @example cy.debugExpressionOutput('foobar')
+     */
+    debugExpressionOutput(text: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('debugExpressionOutput', (text) => {
+  cy.get('.theia-debug-console-expression').contains(text);
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Run /trace off command in debug console
+     *
+     * @example cy.traceOff()
+     */
+    traceOff(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('traceOff', () => {
+  cy.get('.p-Widget .theia-console-input').type('/trace off{enter}');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Run /trace on command in debug console
+     *
+     * @example cy.traceOn()
+     */
+    traceOn(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('traceOn', () => {
+  cy.get('.p-Widget .theia-console-input').type('/trace on{enter}');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Run /calltrace on command in debug console
+     *
+     * @example cy.callTraceOn()
+     */
+    callTraceOn(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('callTraceOn', () => {
+  cy.get('.p-Widget .theia-console-input').type('/calltrace on{enter}');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Run /calltrace off command in debug console
+     *
+     * @example cy.callTraceOff()
+     */
+    callTraceOff(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('callTraceOff', () => {
+  cy.get('.p-Widget .theia-console-input').type('/calltrace off{enter}');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Retrieve the call trace info
+     *
+     * @example cy.callTraceItem('SOME_PROGRAM:22')
+     */
+    callTraceItem(callTraceName: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('callTraceItem', (callTraceName) => {
+  cy.get('[id*="debug:view-container"][id*="debug:frames"]').as('variablePanel').contains(callTraceName);
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Fetch multiple sources
+     *
+     * @example cy.fetchMultipleSources(
+        'Extended source for PROGRAM1 was fetched successfully.',
+        'Extended source for PROGRAM2 was fetched successfully.',
+      );
+     */
+    //@ts-ignore
+    fetchMultipleSources(message: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('fetchMultipleSources', (popups) => {
+  cy.F1();
+  cy.get('.quick-open-input input').as('quickOpen').type('Fetch Extended Sources').type('{enter}').wait(500);
+  cy.get('@quickOpen')
+    .type(PASS, { log: false, delay: 200 })
+    .then(($input) => {
+      if ($input.val() !== PASS) {
+        throw new Error('Different value of typed password');
+      }
+    })
+    .type('{enter}');
+  cy.get('.theia-notification-list').should(($content) => {
+    [popups].forEach((message) => {
+      expect($content).to.contain.text(message);
+    });
+  });
+});
