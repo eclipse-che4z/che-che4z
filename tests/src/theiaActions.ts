@@ -668,3 +668,21 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('getOutlineViewTreeContainer', (): any => cy.get('#outline-view').get('.theia-TreeContainer'));
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Read and write JSON file
+     * Copy from test_files/project/settings/ specific settings json file
+     * and paste to .theia/settings.json and .vscode/settings.json
+     * @example cy.updateConfigs('basic')
+     */
+    updateConfigs(expression: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('updateConfigs', (expression: string) => {
+  cy.readFile(`test_files/project/settings/${expression}.json`).then((content) => {
+    cy.writeFile('test_files/project/.theia/settings.json', content);
+    cy.writeFile('test_files/project/.vscode/settings.json', content);
+  });
+});
