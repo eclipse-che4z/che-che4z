@@ -71,9 +71,9 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('addCopybookLocal', (copybookName: string) => {
-  cy.get('#broadcom-cobol-lsp\\.cpy-manager\\.paths-local-editor .preference-array-input').type(copybookName);
-  cy.get('#broadcom-cobol-lsp\\.cpy-manager\\.paths-local-editor .preference-array-element-btn.add-btn').click();
-  cy.get('#broadcom-cobol-lsp\\.cpy-manager\\.paths-local-editor .pref-input').contains(copybookName);
+  cy.get('#cobol-lsp\\.cpy-manager\\.paths-local-editor .preference-array-input').type(copybookName);
+  cy.get('#cobol-lsp\\.cpy-manager\\.paths-local-editor .preference-array-element-btn.add-btn').click();
+  cy.get('#cobol-lsp\\.cpy-manager\\.paths-local-editor .pref-input').contains(copybookName);
 });
 
 declare namespace Cypress {
@@ -87,9 +87,9 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('addCopybookDSN', (DSN: string) => {
-  cy.get('#broadcom-cobol-lsp\\.cpy-manager\\.paths-dsn-editor .preference-array-input').type(DSN);
-  cy.get('#broadcom-cobol-lsp\\.cpy-manager\\.paths-dsn-editor .preference-array-element-btn.add-btn').click();
-  cy.get('#broadcom-cobol-lsp\\.cpy-manager\\.paths-dsn-editor .preference-array-element-val').contains(DSN);
+  cy.get('#cobol-lsp\\.cpy-manager\\.paths-dsn-editor .preference-array-input').type(DSN);
+  cy.get('#cobol-lsp\\.cpy-manager\\.paths-dsn-editor .preference-array-element-btn.add-btn').click();
+  cy.get('#cobol-lsp\\.cpy-manager\\.paths-dsn-editor .preference-array-element-val').contains(DSN);
 });
 
 declare namespace Cypress {
@@ -103,8 +103,8 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('addCopybookProfile', (ProfileName: string) => {
-  cy.get('input[data-preference-id="broadcom-cobol-lsp.cpy-manager.profiles"]').type(ProfileName).type('{enter}');
-  cy.get('input[data-preference-id="broadcom-cobol-lsp.cpy-manager.profiles"]').should('have.value', ProfileName);
+  cy.get('input[data-preference-id="cobol-lsp.cpy-manager.profiles"]').type(ProfileName).type('{enter}');
+  cy.get('input[data-preference-id="cobol-lsp.cpy-manager.profiles"]').should('have.value', ProfileName);
 });
 
 declare namespace Cypress {
@@ -132,7 +132,7 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('deleteCopybookLocal', (copybookName: string) => {
-  cy.get('#broadcom-cobol-lsp\\.cpy-manager\\.paths-local-editor')
+  cy.get('#cobol-lsp\\.cpy-manager\\.paths-local-editor')
     .find('.preference-array-clear-item')
     .click({ multiple: true });
 });
@@ -148,5 +148,5 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('deleteCopybookDSN', (DSN: string) => {
-  cy.get('#broadcom-cobol-lsp\\.cpy-manager\\.paths-dsn-editor').find('.preference-array-clear-item').click();
+  cy.get('#cobol-lsp\\.cpy-manager\\.paths-dsn-editor').find('.preference-array-clear-item').click();
 });
