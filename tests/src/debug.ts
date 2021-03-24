@@ -821,3 +821,33 @@ Cypress.Commands.add('fetchMultipleSources', (popups) => {
     });
   });
 });
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Expand View for statement trace data
+     *
+     * @example cy.expandStatementTrace();
+     */
+    //@ts-ignore
+    expandStatementTrace(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('expandStatementTrace', () => {
+  cy.get('[id*="debug:view-container"][id*="plugin-view:statementTrace"]').click();
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * View for statement trace data
+     *
+     * @example cy.statementTrace('DECUPGMB:23  IF NUMB = 0 DECUPGMB:22  MOVE NUMB TO NUM.');
+     */
+    //@ts-ignore
+    statementTrace(statementTraceName: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('statementTrace', (statementTraceName) => {
+  cy.get('[id*="debug:view-container"][id*="plugin-view:statementTrace"]').contains(statementTraceName);
+});
