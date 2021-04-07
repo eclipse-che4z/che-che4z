@@ -9,7 +9,7 @@
     "dist/**/*.d.ts"
   ],
   "scripts": {
-    "install": "tsc --build tsconfig.json"
+    "postinstall": "tsc --build tsconfig.json"
   },
   "repository": {
     "type": "git",
