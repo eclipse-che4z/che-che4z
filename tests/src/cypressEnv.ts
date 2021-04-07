@@ -19,6 +19,9 @@ export const CICSUSER2 = Cypress.env('cicsUser2').replace(/\r?\n|\r/g, '');
 export const CICSPASS2 = Cypress.env('cicsPass2').replace(/\r?\n|\r/g, '');
 export const ZOWE = Cypress.env('zowe') == true ? true : false;
 export const CICSAPPLID = Cypress.env('cicsApplId') ? Cypress.env('cicsApplId').replace(/\r?\n|\r/g, '') : '';
+export const SYMDUMPHOST = Cypress.env('symDumpHost');
+export const SYMDUMPPASSWD = Cypress.env('symDumpPasswd');
+export const SYMDUMPPORT = Cypress.env('symDumpPort');
 export const INTERTESTPORT = Cypress.env('interTestPort')
   ? Number(Cypress.env('interTestPort').replace(/\r?\n|\r/g, ''))
   : undefined;

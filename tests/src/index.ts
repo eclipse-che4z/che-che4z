@@ -18,3 +18,4 @@ import './cypressEnv';
 import './debug';
 import './flow';
 import './zowe';
+import './symdump';
