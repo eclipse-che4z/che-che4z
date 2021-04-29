@@ -658,6 +658,25 @@ Cypress.Commands.add('changeVariableValue', (variable, numb) => {
 declare namespace Cypress {
   interface Chainable<Subject> {
     /**
+     * Change variables value
+     *
+     * @example cy.changeVariableValueSecondLevel('TASK-STRUCTURE', 'TASKNUM', '5');
+     */
+    //@ts-ignore
+    changeVariableValue(folder, variable, numb): Chainable<any>;
+  }
+}
+Cypress.Commands.add('changeVariableValueSecondLevel', (folder, variable, numb) => {
+  cy.get('[id*="debug:view-container"][id*="debug:variables"]').as('variablePanel');
+  cy.get('@variablePanel').click();
+  cy.get('@variablePanel').contains('Locals').click().wait(500);
+  cy.get('@variablePanel').contains(folder).click().wait(500);
+  cy.get('@variablePanel').contains(variable).dblclick();
+  cy.get('.dialogContent').find('.theia-input').type(numb).type('{enter}');
+});
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
      * Check variables value
      *
      * @example cy.checkVariableValue('NUMB', 5)
