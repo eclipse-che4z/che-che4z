@@ -15,7 +15,10 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
 /// <reference types="cypress" />
+
 const {
+  //@ts-ignore
+  USER,
   SYMDUMPHOST,
   SYMDUMPPASSWD,
   SYMDUMPPORT,
@@ -108,6 +111,7 @@ Cypress.Commands.add('symDumpAddNewConnection', () => {
   cy.newConnection();
   cy.entryField().as('quickOpen').type(SYMDUMPHOST).type('{enter}');
   cy.get('@quickOpen').type(SYMDUMPPORT).type('{enter}');
+  cy.get('@quickOpen').type(USER).type('{enter}');
   cy.get('@quickOpen')
     .type(SYMDUMPPASSWD, { log: false, delay: 200 })
     .then(($input) => {
@@ -115,7 +119,6 @@ Cypress.Commands.add('symDumpAddNewConnection', () => {
         throw new Error('Different value of typed password');
       }
     })
-    .type('{enter}')
     .type('{enter}');
   cy.connectionName();
 });
@@ -214,7 +217,7 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('jobDump', (DSNAME, jobName) => {
-  cy.get(`[id*="/0:${hostname}:${SYMDUMPPORT}/0:${DSNAME}/1:Job=${jobName}"]`);
+  cy.get(`[id*="/0:${hostname}:${SYMDUMPPORT}/0:${DSNAME}/0:Job=${jobName}"]`);
 });
 
 declare namespace Cypress {
@@ -272,7 +275,7 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('jobInTree', (dataSet, jobName) => {
-  cy.get(`[id="/0:${hostname}:${SYMDUMPPORT}/0:${dataSet}/1:Job=${jobName}"]`);
+  cy.get(`[id="/0:${hostname}:${SYMDUMPPORT}/0:${dataSet}/0:Job=${jobName}"]`);
 });
 
 declare namespace Cypress {
@@ -296,12 +299,12 @@ declare namespace Cypress {
      *
      * @example cy.findDump(jobName, param);
      */
-    findDump(dataSet: string, jobName: string, param: string): Chainable<any>;
+    findDump(jobName: string, param: string): Chainable<any>;
   }
 }
-Cypress.Commands.add('findDump', (dataSet, jobName, param) => {
+Cypress.Commands.add('findDump', (jobName, param) => {
   cy.window().then(() => {
-    cy.get(`[id="/0:${hostname}:${SYMDUMPPORT}/0:${dataSet}/1:Job=${jobName}${param}"]`);
+    cy.get(`[id$="Job=${jobName}${param}"]`);
   });
 });
 
@@ -312,11 +315,11 @@ declare namespace Cypress {
      *
      * @example cy.clickOnDump(dataSet, jobName, param);
      */
-    clickOnDump(dataSet: string, jobName: string, param: string): Chainable<any>;
+    clickOnDump(jobName: string, param: string): Chainable<any>;
   }
 }
-Cypress.Commands.add('clickOnDump', (dataSet, jobName, param) => {
+Cypress.Commands.add('clickOnDump', (jobName, param) => {
   cy.window().then(() => {
-    cy.findDump(dataSet, jobName, param).click({ force: true });
+    cy.findDump(jobName, param).click({ force: true });
   });
 });
