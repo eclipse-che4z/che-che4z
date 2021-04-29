@@ -15,6 +15,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
 /// <reference types="cypress" />
+
 declare namespace Cypress {
   interface Chainable<Subject> {
     /**
@@ -49,9 +50,9 @@ declare namespace Cypress {
 Cypress.Commands.add('addZoweProfile', (profile: string) => {
   cy.get('[id*="plugin-view-container:zowe"][id*="plugin-view:zowe.explorer"]').trigger('mousedown').click();
   cy.get('#__plugin\\.view\\.title\\.action\\.zowe\\.addSession').click();
-  cy.get('.quick-open-input input').as('quickOpen').type(`${profile}{enter}`).wait(3000);
-  cy.get('@quickOpen').type(Cypress.env('zowe'), { delay: 100 }).type('{enter}').type('{enter}').wait(1000);
-  cy.get('@quickOpen').type(Cypress.env('username')).type('{enter}').wait(1000);
+  cy.get('.quick-open-input input').as('quickOpen').type('{enter}').type(`${profile}{enter}`);
+  cy.get('@quickOpen').type(Cypress.env('zowe'), { delay: 100 }).type('{enter}');
+  cy.get('@quickOpen').type(Cypress.env('username')).type('{enter}');
   cy.get('@quickOpen')
     .type(Cypress.env('password'), { log: false, delay: 200 })
     .then(($input) => {
@@ -61,6 +62,8 @@ Cypress.Commands.add('addZoweProfile', (profile: string) => {
     })
     .type('{enter}')
     .type('{downarrow}')
+    .type('{enter}')
+    .type('{enter}')
     .type('{enter}')
     .type('{enter}');
 });
@@ -76,6 +79,7 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('deleteZoweProfile', (profile: string) => {
+  //@ts-ignore
   cy.openZowePanel();
   cy.get('[id*="plugin-view:zowe.explorer"] .theia-TreeContainer').contains(profile).rightclick();
   cy.get('[data-command*="__plugin.menu.action.zowe.deleteProfile"]').click();
@@ -95,10 +99,9 @@ declare namespace Cypress {
 }
 Cypress.Commands.add('searchDataSet', (profile: string, dataset: string) => {
   cy.get('[id*="plugin-view:zowe.explorer"] .theia-TreeContainer').contains(profile).trigger('mousedown').click();
-  cy.get(`.theia-TreeNodeContent [data-node-id*="/1:${profile}"]`).get('.plugin-icon-3').click();
+  cy.get(`.theia-TreeNodeContent [data-node-id*="/1:${profile}"]`).get('[title="Search Data Sets"]').click();
 
-  cy.get('.quick-open-input input').type(`${dataset}{enter}`, { delay: 100 });
-  cy.wait(3000);
+  cy.get('.quick-open-input input').type(`${dataset}{enter}`, { delay: 100 }).type('{enter}');
 });
 
 declare namespace Cypress {
@@ -126,5 +129,23 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('openJCL', (jcl: string, profile: string, dataset: string) => {
-  cy.get(`.ReactVirtualized__Grid__innerScrollContainer [id*="/1:${profile} /0:${dataset}/0:${jcl}"]`).click().click();
+  cy.get(`[id*="/1:${profile} /0:${dataset}/2:${jcl}"]`).click().click();
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Open Jobs Sections
+     *
+     * @example cy.openJobs('TEST', '(TSU01772) - ABEND S222', 'JES2:JESJCL(3)');
+     */
+    openJobs(profile: string, folder: string, jobName: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('openJobs', (profile: string, folder: string, jobName: string) => {
+  //@ts-ignore
+  cy.openZowePanel();
+  cy.get('[id*="plugin-view-container:zowe--plugin-view:zowe.jobs"]').click().contains(profile).click();
+  cy.get(`[id*="/1:${profile}/0:${folder}"]`).click();
+  cy.get(`[id*="/1:${profile}/0:${folder}/1:${jobName}"]`).click();
 });
