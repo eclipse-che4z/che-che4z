@@ -25,7 +25,12 @@ const {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
 } = require('./cypressEnv');
 
-const { hostname } = new URL(SYMDUMPHOST);
+// eslint-disable-next-line no-useless-escape
+const pattern = /(.+:\/\/)?([^\/]+)(\/.*)*/i;
+const url = SYMDUMPHOST;
+const arr = pattern.exec(url);
+//@ts-ignore
+const hostname = arr[2];
 
 declare namespace Cypress {
   interface Chainable<Subject> {
