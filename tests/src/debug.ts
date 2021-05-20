@@ -17,6 +17,7 @@
 
 /// <reference types="cypress" />
 
+//@ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { USER, PASS, CICSAPPLID, INTERTESTPORT, CONVJCL, ORIGJCL } = require('./cypressEnv');
 
