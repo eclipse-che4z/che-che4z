@@ -18,6 +18,8 @@
 
 const {
   //@ts-ignore
+  PASS,
+  //@ts-ignore
   USER,
   SYMDUMPHOST,
   SYMDUMPPASSWD,
@@ -25,12 +27,7 @@ const {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
 } = require('./cypressEnv');
 
-// eslint-disable-next-line no-useless-escape
-const pattern = /(.+:\/\/)?([^\/]+)(\/.*)*/i;
-const url = SYMDUMPHOST;
-const arr = pattern.exec(url);
-//@ts-ignore
-const hostname = arr[2];
+const { hostname } = new URL(SYMDUMPHOST);
 
 declare namespace Cypress {
   interface Chainable<Subject> {
@@ -139,7 +136,7 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('connectionName', () => {
-  cy.get(`[id="/0:${hostname}:${SYMDUMPPORT}"]`);
+  cy.get(`[title="http://${hostname}:${SYMDUMPPORT}"]`);
 });
 
 declare namespace Cypress {
@@ -159,26 +156,49 @@ Cypress.Commands.add('clickOnConnectionName', () => {
 declare namespace Cypress {
   interface Chainable<Subject> {
     /**
-     * Delete the connection
+     * Delete the connection, data (host and port) are taken from your as-a file
      *
-     * @example cy.deleteSymDumpConnection();
+     * @example cy.deleteSymDumpConnectionDefault();
      */
-    deleteSymDumpConnection(): Chainable<any>;
+    deleteSymDumpConnectionDefault(): Chainable<any>;
   }
 }
-Cypress.Commands.add('deleteSymDumpConnection', () => {
+Cypress.Commands.add('deleteSymDumpConnectionDefault', () => {
   cy.openSymDump();
-  cy.symDumpPanel()
-    .find('.theia-TreeNode')
-    .then(($connection) => {
-      if ($connection.find('[id="/0:No Connection"]').length) {
-        console.log('Nothing to delete');
-      } else {
-        cy.symDumpPanel().type('{pageup}').type('{pageup}');
-        cy.clickOnConnectionName();
-        cy.get('[title*="Delete connection"]').click();
-      }
-    });
+  cy.get('[id="symdump"]').then(($connection) => {
+    if ($connection.find('.theia-TreeContainer.empty').length) {
+      console.log('Nothing to delete');
+    } else {
+      cy.symDumpPanel().type('{pageup}').type('{pageup}');
+      cy.clickOnConnectionName();
+      cy.get('[title*="Delete connection"]').click();
+      cy.get('.dialogControl').find('button.theia-button.main').contains('OK').click({ force: true });
+    }
+  });
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Delete the connection by adding custom hostname and port
+     *
+     * @example cy.deleteSymDumpConnectionCustom();
+     */
+    deleteSymDumpConnectionCustom(host: string, port: number): Chainable<any>;
+  }
+}
+Cypress.Commands.add('deleteSymDumpConnectionCustom', (host, port) => {
+  cy.openSymDump();
+  cy.get('[id="symdump"]').then(($connection) => {
+    if ($connection.find('.theia-TreeContainer.empty').length) {
+      console.log('Nothing to delete');
+    } else {
+      cy.symDumpPanel().type('{pageup}').type('{pageup}');
+      cy.get(`[title*= "${host}:${port}"]`).trigger('mousedown').click();
+      cy.get('[title*="Delete connection"]').click();
+      cy.get('.dialogControl').find('button.theia-button.main').contains('OK').click({ force: true });
+    }
+  });
 });
 
 declare namespace Cypress {
@@ -208,7 +228,7 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('dataSet', (DSNAME) => {
-  cy.get(`[id*="/0:${hostname}:${SYMDUMPPORT}/0:${DSNAME}"]`);
+  cy.get(`.theia-TreeNodeSegment[title*="${DSNAME}"]`);
 });
 
 declare namespace Cypress {
@@ -216,13 +236,13 @@ declare namespace Cypress {
     /**
      * Load jobs
      *
-     * @example cy.jobDump(dataSet, jobName).click().get('[title*="Load dump"]').click();
+     * @example cy.jobDump(jobName).click().get('[title*="Load dump"]').click();
      */
-    jobDump(DSNAME: string, jobName: string): Chainable<any>;
+    jobDump(jobName: string): Chainable<any>;
   }
 }
-Cypress.Commands.add('jobDump', (DSNAME, jobName) => {
-  cy.get(`[id*="/0:${hostname}:${SYMDUMPPORT}/0:${DSNAME}/0:Job=${jobName}"]`);
+Cypress.Commands.add('jobDump', (jobName) => {
+  cy.get(`[title*="Job=${jobName}"]`);
 });
 
 declare namespace Cypress {
@@ -237,7 +257,6 @@ declare namespace Cypress {
 }
 Cypress.Commands.add('loadDumps', (DSNAME) => {
   cy.dataSet(DSNAME).trigger('mousedown').click();
-  cy.get('[title*="Load dumps"]').click();
 });
 
 declare namespace Cypress {
@@ -252,7 +271,6 @@ declare namespace Cypress {
 }
 Cypress.Commands.add('loadDump', (DSNAME) => {
   cy.dataSet(DSNAME).trigger('mousedown').click();
-  cy.get('[title*="Load dump"]').click();
 });
 
 declare namespace Cypress {
@@ -276,11 +294,11 @@ declare namespace Cypress {
      *
      * @example cy.jobInTree();
      */
-    jobInTree(dataSet: string, jobName: string): Chainable<any>;
+    jobInTree(jobName: string): Chainable<any>;
   }
 }
-Cypress.Commands.add('jobInTree', (dataSet, jobName) => {
-  cy.get(`[id="/0:${hostname}:${SYMDUMPPORT}/0:${dataSet}/0:Job=${jobName}"]`);
+Cypress.Commands.add('jobInTree', (jobName) => {
+  cy.get(`[title*="Job=${jobName}"]`);
 });
 
 declare namespace Cypress {
@@ -290,11 +308,11 @@ declare namespace Cypress {
      *
      * @example cy.clickOnJob('CDE.PROD.CAWORLD.PRTLIB', "DAVSC01A CA32:S=0C7 2018/10/04 15.37");
      */
-    clickOnJob(dataSet: string, jobName: string): Chainable<any>;
+    clickOnJob(jobName: string): Chainable<any>;
   }
 }
-Cypress.Commands.add('clickOnJob', (dataSet, jobName) => {
-  cy.jobInTree(dataSet, jobName).click({ force: true });
+Cypress.Commands.add('clickOnJob', (jobName) => {
+  cy.jobInTree(jobName).click({ force: true });
 });
 
 declare namespace Cypress {
@@ -327,4 +345,224 @@ Cypress.Commands.add('clickOnDump', (jobName, param) => {
   cy.window().then(() => {
     cy.findDump(jobName, param).click({ force: true });
   });
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Click on icon 'Edit connection'
+     *
+     * @example cy.editConnection();
+     */
+    editConnection(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('editConnection', () => {
+  cy.clickOnConnectionName();
+  cy.get('[title*="Edit connection"]').click();
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Edit a SymDump hostname
+     *
+     * @example cy.editConnection('http://1.2.3.4.');
+     */
+    editConnection(host: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('editConnectionHost', (host) => {
+  cy.editConnection();
+  cy.entryField()
+    .type('{selectall}{backspace}')
+    .type(host)
+    .type('{enter}', { delay: 200 })
+    .type('{enter}', { delay: 200 })
+    .type('{enter}', { delay: 200 })
+    .type(PASS, { log: false, delay: 200 })
+    .type('{enter}');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Edit a SymDump port
+     *
+     * @example cy.editConnectionPort('12345');
+     */
+    editConnectionPort(port: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('editConnectionPort', (port) => {
+  cy.editConnection();
+  cy.entryField()
+    .type('{enter}')
+    .type('{selectall}{backspace}')
+    .type(port)
+    .type('{enter}', { delay: 200 })
+    .type('{enter}', { delay: 200 })
+    .type(PASS, { log: false, delay: 200 })
+    .type('{enter}');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Edit a SymDump username
+     *
+     * @example cy.editConnectionUsername('username1');
+     */
+    editConnectionUsername(user: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('editConnectionUsername', (user) => {
+  cy.editConnection();
+  cy.entryField()
+    .type('{enter}')
+    .type('{enter}')
+    .type('{selectall}{backspace}')
+    .type(user)
+    .type('{enter}', { delay: 200 })
+    .type(PASS, { log: false, delay: 200 })
+    .type('{enter}');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * While edititng in fact no data has been changed
+     *
+     * @example cy.editConnectionNothing();
+     */
+    editConnectionNothing(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('editConnectionNothing', () => {
+  cy.editConnection();
+  cy.entryField().type('{enter}').type('{enter}').type('{enter}');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Sort dumps by ascending
+     *
+     * @example cy.sortDumpsAscending();
+     */
+    sortDumpsAscending(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('sortDumpsAscending', () => {
+  cy.get('[data-command="__plugin.menu.action.symdump.sortDumpsAscending"]').click().wait(500);
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Sort dumps by descending
+     *
+     * @example cy.sortDumpsDescending();
+     */
+    sortDumpsDescending(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('sortDumpsDescending', () => {
+  cy.get('[data-command="__plugin.menu.action.symdump.sortDumpsDescending"]').click().wait(500);
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Open SymDump settings
+     *
+     * @example cy.openSettingsSymDump();
+     */
+    openSettingsSymDump(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('openSettingsSymDump', () => {
+  cy.get('[id="theia:menubar"]').get('.p-MenuBar-content').contains('File').click();
+  cy.get('[data-type="submenu"]').click();
+  cy.get('.p-Menu-itemLabel').contains('Open Preferences').click();
+  cy.get('input.settings-search-input.theia-input').type('symdump');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Get the PROTSYM element
+     *
+     * @example cy.PROTSYM();
+     */
+    PROTSYM(): Chainable<any>;
+  }
+}
+Cypress.Commands.add('PROTSYM', () => {
+  cy.get('[title*="PROTSYMS"]');
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Add a PROTSYM
+     *
+     * @example cy.addProtsym('TEST1');
+     */
+    addProtsym(protsym: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('addProtsym', (protsym) => {
+  cy.PROTSYM().trigger('mousedown').click();
+  cy.get('[title*="Add PROTSYM"]').click();
+  cy.entryField().type(`${protsym}{enter}`);
+  cy.get(`[title*="${protsym}"]`);
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Add a PROTSYM
+     *
+     * @example cy.addProtsymRightClick('TEST2');
+     */
+    addProtsymRightClick(protsym: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('addProtsymRightClick', (protsym) => {
+  cy.PROTSYM().rightclick();
+  cy.get('[data-command="__plugin.menu.action.symdump.addProtsym:0"]').contains('Add PROTSYM').click();
+  cy.entryField().type(`${protsym}{enter}`);
+  cy.get(`[title*="${protsym}"]`);
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Load dumps with right-click on a DS
+     *
+     * @example cy.loadDumpsRightClick('QWERTY.UIO.LOAD);
+     */
+    loadDumpsRightClick(dataSet: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('loadDumpsRightClick', (dataSet) => {
+  cy.dataSet(dataSet).rightclick();
+  cy.get('[data-command="__plugin.menu.action.symdump.loadDumps:0"]').click();
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Delete DS right-click on a DS
+     *
+     * @example cy.deleteDSRightClick('QWERTY.UIO.LOAD);
+     */
+    deleteDSRightClick(dataSet: string): Chainable<any>;
+  }
+}
+Cypress.Commands.add('deleteDSRightClick', (dataSet) => {
+  cy.dataSet(dataSet).rightclick();
+  cy.get('[data-command="__plugin.menu.action.symdump.deleteDataset:0"]').click();
+  cy.get('.dialogControl').find('button.theia-button.main').contains('OK').click({ force: true });
 });
