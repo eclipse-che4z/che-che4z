@@ -113,13 +113,14 @@ Cypress.Commands.add('symDumpAddNewConnection', (profileName) => {
   cy.newConnection();
   cy.entryField()
     .as('quickOpen')
-    .type(profileName)
+    .type(profileName, { delay: 50 })
     .type('{enter}')
-    .type(`${SYMDUMPHOST}:${SYMDUMPPORT}`)
+    .wait(500)
+    .type(`${SYMDUMPHOST}:${SYMDUMPPORT}`, { delay: 50 })
     .type('{enter}');
-  cy.get('@quickOpen').type(USER).type('{enter}');
+  cy.get('@quickOpen').type(USER, { delay: 50 }).type('{enter}');
   cy.get('@quickOpen')
-    .type(SYMDUMPPASSWD, { log: false, delay: 200 })
+    .type(SYMDUMPPASSWD, { log: false, delay: 50 })
     .then(($input) => {
       if ($input.val() !== SYMDUMPPASSWD) {
         throw new Error('Different value of typed password');
@@ -218,7 +219,8 @@ declare namespace Cypress {
 Cypress.Commands.add('addDataSet', (DSNAME, profileName) => {
   cy.clickOnConnectionName(profileName);
   cy.get('[title*="Add dataset"]').click();
-  cy.entryField().type(DSNAME).type('{enter}');
+  // temporary solution with 'Batch'
+  cy.entryField().type(DSNAME, { delay: 50 }).type('{enter}').type('Batch', { delay: 50 }).type('{enter}');
 });
 
 declare namespace Cypress {
