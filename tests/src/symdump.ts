@@ -213,14 +213,13 @@ declare namespace Cypress {
      *
      * @example cy.addDataSet('CDE.PROD.CAWORLD.PRTLIB', 'TEST');
      */
-    addDataSet(DSNAME: string, profileName: string): Chainable<any>;
+    addDataSet(DSNAME: string, profileName: string, type: string): Chainable<any>;
   }
 }
-Cypress.Commands.add('addDataSet', (DSNAME, profileName) => {
+Cypress.Commands.add('addDataSet', (DSNAME, profileName, type) => {
   cy.clickOnConnectionName(profileName);
   cy.get('[title*="Add dataset"]').click();
-  // temporary solution with 'Batch'
-  cy.entryField().type(DSNAME, { delay: 50 }).type('{enter}').type('Batch', { delay: 50 }).type('{enter}');
+  cy.entryField().type(DSNAME, { delay: 50 }).type('{enter}').type(type, { delay: 50 }).type('{enter}');
 });
 
 declare namespace Cypress {
