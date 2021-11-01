@@ -11,142 +11,154 @@
  * Contributors:
  *  Broadcom, Inc. - initial API and implementation
  */
+/* eslint-disable @typescript-eslint/no-namespace */
 
 /// <reference types="cypress" />
 
-/* eslint-disable @typescript-eslint/no-namespace */
+import { Theia, COBOLLS } from './selectorsTheia';
 
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    /**
-     * Open Output window, select LSP extension and return its output.
-     *
-     *  @example cy.getLSPOutput().should('have.text', loaded)
-     */
-    getLSPOutput(): Chainable<any>;
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Open Output window, select LSP extension and return its output.
+       *
+       *  @example cy.getLSPOutput().should('have.text', loaded)
+       */
+      getLSPOutput(): Chainable<any>;
+    }
   }
 }
 Cypress.Commands.add('getLSPOutput', () => {
-  cy.get('#theia-bottom-split-panel').then(($theia) => {
-    if (!$theia.find('#outputView').length) {
+  cy.get(Theia.bottomSplitPanel).then(($theia) => {
+    if (!$theia.find(Theia.outlineView).length) {
       cy.get('.editor-scrollable').type('{shift}{ctrl}u');
-      cy.get('.left.area .element .fa-spin').should('not.exist', { timeout: 40000 });
+      cy.get(Theia.loadSpinner).should('not.exist', { timeout: 40000 });
     }
-    cy.get('#outputChannelList').select('LSP extension for COBOL language', { timeout: 40000 });
-    cy.get('#outputContents');
+    cy.get(Theia.outputChannelList).select('LSP extension for COBOL language', { timeout: 40000 });
+    cy.get(Theia.outputContents);
   });
 });
 
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    /**
-     * Click on 'Change Settings'
-     *
-     *  @example cy.clickOnChangeSettings(A.cpy).
-     */
-    clickOnChangeSettings(copybookName: string): Chainable<any>;
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Click on 'Change Settings'
+       *
+       *  @example cy.clickOnChangeSettings(A.cpy).
+       */
+      clickOnChangeSettings(copybookName: string): Chainable<any>;
+    }
   }
 }
 Cypress.Commands.add('clickOnChangeSettings', (copybookName: string) => {
-  cy.get('.theia-notifications-container')
+  cy.get(Theia.notificationsContainer)
     .filter('.open')
-    .find('.theia-notification-message')
-    .should('contain.text', 'Missing copybooks: ${copybookName}')
+    .find(Theia.notificationMessage)
+    .should('contain.text', `Missing copybooks: ${copybookName}`)
     .then(($message) => {
-      cy.wrap($message)
-        .parentsUntil('.theia-notification-list-item')
-        .find('.theia-button[data-action="Change settings"]')
-        .click();
+      cy.wrap($message).parentsUntil(Theia.notification).find(Theia.changeSettingsButton).click();
     });
 });
 
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    /**
-     * Click on 'Add Local Copybboks'
-     *
-     *  @example cy.addCopybookLocal(A.cpy).
-     */
-    addCopybookLocal(copybookName: string): Chainable<any>;
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Click on 'Add Local Copybboks'
+       *
+       *  @example cy.addCopybookLocal(A.cpy).
+       */
+      addCopybookLocal(copybookName: string): Chainable<any>;
+    }
   }
 }
 Cypress.Commands.add('addCopybookLocal', (copybookName: string) => {
-  cy.get('#cobol-lsp\\.cpy-manager\\.paths-local-editor .preference-array-input').type(copybookName);
-  cy.get('#cobol-lsp\\.cpy-manager\\.paths-local-editor .preference-array-element-btn.add-btn').click();
-  cy.get('#cobol-lsp\\.cpy-manager\\.paths-local-editor .pref-input').contains(copybookName);
+  cy.get(COBOLLS.inputCopybookNameInSettingsLocal).type(copybookName);
+  cy.get(COBOLLS.addCopybookInSettingsLocal).click();
+  cy.get(COBOLLS.checkCopybookInSettingsLocal).contains(copybookName);
 });
 
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    /**
-     * Click on 'Add Copybook DSN'
-     *
-     *  @example cy.addCopybookDSN(TEST).
-     */
-    addCopybookDSN(DSN: string): Chainable<any>;
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Click on 'Add Copybook DSN'
+       *
+       *  @example cy.addCopybookDSN(TEST).
+       */
+      addCopybookDSN(DSN: string): Chainable<any>;
+    }
   }
 }
 Cypress.Commands.add('addCopybookDSN', (DSN: string) => {
-  cy.get('#cobol-lsp\\.cpy-manager\\.paths-dsn-editor .preference-array-input').type(DSN);
-  cy.get('#cobol-lsp\\.cpy-manager\\.paths-dsn-editor .preference-array-element-btn.add-btn').click();
-  cy.get('#cobol-lsp\\.cpy-manager\\.paths-dsn-editor .preference-array-element-val').contains(DSN);
+  cy.get(COBOLLS.inputCopybookNameInSettingsDSN).type(DSN);
+  cy.get(COBOLLS.addCopybookInSettingsDNS).click();
+  cy.get(COBOLLS.checkCopybookInSettingsDSN).contains(DSN);
 });
 
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    /**
-     * Click on 'Add Copybook PROFILE'
-     *
-     *  @example cy.addCopybookProfile(TEST).
-     */
-    addCopybookProfile(ProfileName: string): Chainable<any>;
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Click on 'Add Copybook PROFILE'
+       *
+       *  @example cy.addCopybookProfile(TEST).
+       */
+      addCopybookProfile(ProfileName: string): Chainable<any>;
+    }
   }
 }
 Cypress.Commands.add('addCopybookProfile', (ProfileName: string) => {
-  cy.get('input[data-preference-id="cobol-lsp.cpy-manager.profiles"]').type(ProfileName).type('{enter}');
-  cy.get('input[data-preference-id="cobol-lsp.cpy-manager.profiles"]').should('have.value', ProfileName);
+  cy.get(COBOLLS.inputProfileInSettings).type(ProfileName).type('{enter}');
+  cy.get(COBOLLS.inputProfileInSettings).should('have.value', ProfileName);
 });
 
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    /**
-     * Click on 'Workspace Tab'
-     *
-     *  @example cy.clickWorkspaceTab().
-     */
-    clickWorkspaceTab(): Chainable<any>;
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Click on 'Workspace Tab'
+       *
+       *  @example cy.clickWorkspaceTab().
+       */
+      clickWorkspaceTab(): Chainable<any>;
+    }
   }
 }
 Cypress.Commands.add('clickWorkspaceTab', () => {
-  cy.get('.p-TabBar-tab.preferences-scope-tab').contains('Workspace').click();
+  cy.get(Theia.workspaceTabInSettings).contains('Workspace').click();
 });
 
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    /**
-     * Delete Local Copybook in UI
-     *
-     *  @example cy.deleteCopybookLocal('A.cpy').
-     */
-    deleteCopybookLocal(copybookName: string): Chainable<any>;
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Delete Local Copybook in UI
+       *
+       *  @example cy.deleteCopybookLocal('A.cpy').
+       */
+      deleteCopybookLocal(copybookName: string): Chainable<any>;
+    }
   }
 }
 Cypress.Commands.add('deleteCopybookLocal', (copybookName: string) => {
-  cy.get('#cobol-lsp\\.cpy-manager\\.paths-local-editor')
-    .find('.preference-array-clear-item')
-    .click({ multiple: true });
+  cy.get(COBOLLS.pathsLocalEditor).find(Theia.clearItem).click({ multiple: true });
 });
 
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    /**
-     * Delete DSN in UI
-     *
-     *  @example cy.deleteCopybookDSN('TEST').
-     */
-    deleteCopybookDSN(DSN: string): Chainable<any>;
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Delete DSN in UI
+       *
+       *  @example cy.deleteCopybookDSN('TEST').
+       */
+      deleteCopybookDSN(DSN: string): Chainable<any>;
+    }
   }
 }
 Cypress.Commands.add('deleteCopybookDSN', (DSN: string) => {
-  cy.get('#cobol-lsp\\.cpy-manager\\.paths-dsn-editor').find('.preference-array-clear-item').click();
+  cy.get(COBOLLS.pathsDsnEditor).find(Theia.clearItem).click();
 });
