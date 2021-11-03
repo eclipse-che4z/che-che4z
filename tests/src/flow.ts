@@ -16,6 +16,11 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference types="cypress-iframe" />
 
+/**
+ * THIS MODULE IS NOT VALID ANYMORE. WE NEED TO USE PLAYWRIGHT IN ORDER
+ * TO USE IFRAMES IN TESTS. CYPRESS CAN'T HANLDE THEM!
+ * SOON THIS FILE WOULD BE DELETED.
+ */
 require('cypress-iframe');
 require('cypress-xpath');
 
