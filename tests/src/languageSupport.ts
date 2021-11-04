@@ -18,6 +18,11 @@
 import { Theia, COBOLLS } from './selectorsTheia';
 
 declare global {
+  /**
+   * A workaround that has allowed me to add import and export
+   * statements to my *.ts files is to explicitly declare
+   * Cypress on the global namespace.
+   */
   namespace Cypress {
     interface Chainable<Subject> {
       /**

@@ -152,7 +152,27 @@ export const AA4MF = {
   symdumpJob: '[id="Job=${jobName}${param}"]',
   symdumpPanel: '[id="plugin-view-container:symdumpView"]',
   symdumpView: 'ul.p-TabBar-content li[id="shell-tab-plugin-view-container:symdumpView"]',
-  unlockReport: '[data-command="__plugin.menu.action.symdump.lockReport"',
+  unlockReport: '[data-command="__plugin.menu.action.symdump.unlockReport"',
   viewLabel: '[data-pref-id="symdump.view.label"]',
   viewLabelEditor: '[id="symdump.view.label-editor"]',
+};
+
+export const E4E = {
+  editElement: '[data-command="__plugin.menu.action.e4e.editElement"]',
+  endevorExplorer: '[id="plugin-view:endevorExplorer"]',
+  explorerContainer: '.p-TabBar-tab[id="shell-tab-plugin-view-container:e4eExplorerContainer"]',
+  elmTreeView: '[id="plugin-view:e4e.elmTreeView"]',
+  hideServise: '[data-command="__plugin.menu.action.e4e.hideService"]',
+  pluginView: '[id="plugin-view-container:e4eExplorerContainer--plugin-view:e4e.elmTreeView"]',
+  retrieveElementWithDependencies: '[data-command="__plugin.menu.action.e4e.retrieveElementWithDependencies"]',
+};
+
+export const ZOWE = {
+  addSession: '#__plugin\\.view\\.title\\.action\\.zowe\\.addSession',
+  deleteProfile: '[data-command*="__plugin.menu.action.zowe.deleteProfile"]',
+  zoweJobs: '[id*="plugin-view-container:zowe--plugin-view:zowe.jobs"]',
+  zoweTreeContainer: '[id*="plugin-view:zowe.explorer"] .theia-TreeContainer',
+  zoweHidden: '#plugin-view-container\\:zowe.p-mod-hidden',
+  zoweView: '.p-TabBar-content #shell-tab-plugin-view-container\\:zowe',
+  zowePluginView: '[id*="plugin-view-container:zowe"][id*="plugin-view:zowe.explorer"]',
 };
