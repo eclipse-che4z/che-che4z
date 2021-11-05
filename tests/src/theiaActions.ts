@@ -235,11 +235,11 @@ Cypress.Commands.add('deleteFile', (fileName: string) => {
   cy.get(Theia.dialogTitle)
     .contains('Delete File')
     .parent()
-    .siblings(Theia.dialogTitle)
+    .siblings(Theia.dialogContent)
     .contains(fileName)
     .parent()
-    .siblings(Theia.dialogTitle)
-    .find(Theia.theiaButtonOK)
+    .siblings(Theia.dialogControl)
+    .find('button' + Theia.theiaButtonOK)
     .contains('OK')
     .click({ force: true });
 });
