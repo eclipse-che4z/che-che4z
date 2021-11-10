@@ -2,7 +2,6 @@
  * Copyright (c) 2021 Broadcom.
  * The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
-
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -16,9 +15,11 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
 /// <reference types="cypress" />
-import { Theia } from './selectorsTheia';
+import { Theia, VSCODE } from './selectors';
 import { USER, PASS, CICSAPPLID, INTERTESTPORT, CONVJCL, ORIGJCL } from './cypressEnv';
 
+const env = Cypress.env('ide');
+const IDE = env === 'theia' ? Theia : VSCODE;
 const rawTypeString = (str: string) => str.replace(/{/g, '{{}'); // Types the literal { key
 
 declare global {

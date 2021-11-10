@@ -15,8 +15,12 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
 /// <reference types="cypress" />
-import { Theia } from './selectorsTheia';
 
+import { Theia, VSCODE } from './selectors';
+import 'cypress-real-events/support';
+
+const env = Cypress.env('ide');
+const IDE = env === 'theia' ? Theia : VSCODE;
 const theiaMod = Theia.collapsed;
 const theiaModwoDot = theiaMod.replace(/^./, '');
 
@@ -39,15 +43,17 @@ declare global {
 }
 
 Cypress.Commands.add('waitForAppStart', () => {
-  cy.get(Theia.mainContentPanel, {
+  cy.get(IDE.mainContentPanel, {
     timeout: Cypress.env('appStarTimeout'),
   });
-  cy.get(Theia.preLoad).should('not.exist', {
-    timeout: Cypress.env('appStartTimeout'),
-  });
-  cy.get(Theia.loadSpinner).should('not.exist', {
-    timeout: Cypress.env('appStartTimeout'),
-  });
+  if (IDE === Theia) {
+    cy.get(Theia.preLoad).should('not.exist', {
+      timeout: Cypress.env('appStartTimeout'),
+    });
+    cy.get(Theia.loadSpinner).should('not.exist', {
+      timeout: Cypress.env('appStartTimeout'),
+    });
+  }
 });
 
 declare global {
@@ -83,11 +89,14 @@ declare global {
   }
 }
 Cypress.Commands.add('openFileExplorer', () => {
-  cy.get(Theia.leftRightPanel).then(($theia) => {
-    if ($theia.find(Theia.elementCollapsed).length || $theia.find(Theia.explorerId).length) {
-      cy.get(Theia.explorerIcon).click();
+  cy.get(IDE.leftRightPanel).then(($ide) => {
+    // @ts-ignore
+    if ($ide.find(IDE.elementCollapsed).length || $ide.find(IDE.explorerId).length) {
+      cy.get(IDE.explorerIcon).click();
     }
-    cy.hideSourceView();
+    if (IDE === Theia) {
+      cy.hideSourceView();
+    }
   });
 });
 
@@ -106,7 +115,7 @@ declare global {
 }
 Cypress.Commands.add('findExplorerTreeNode', (nodeName: string) => {
   cy.openFileExplorer();
-  cy.get(Theia.explorerView).contains(nodeName);
+  cy.get(IDE.explorerView).contains(nodeName);
 });
 
 declare global {
@@ -127,10 +136,11 @@ Cypress.Commands.add('openFolder', (path: string) => {
     cy.findExplorerTreeNode(folderName)
       .as('folder')
       .then(($folder: { siblings: (arg0: string) => { (): any; new (): any; length: any } }) => {
-        if ($folder.siblings(Theia.collapsed).length) {
-          cy.wrap($folder).click({ force: true });
-
-          cy.get('@folder').siblings().should('not.have.class', theiaModwoDot);
+        if (IDE === Theia) {
+          if ($folder.siblings(Theia.collapsed).length) {
+            cy.wrap($folder).click({ force: true });
+            cy.get('@folder').siblings().should('not.have.class', theiaModwoDot);
+          }
         }
       });
   });
@@ -160,25 +170,25 @@ Cypress.Commands.add('closeFolder', (path: string) => {
   });
 });
 
-declare global {
-  namespace Cypress {
-    interface Chainable<Subject> {
-      /**
-       * Create new file in given path.
-       *
-       * @example cy.createNewFile('.copybooks/profile', 'COPYBOOK.cpy')
-       */
-      createNewFile(path: string, fileName: string): Chainable<any>;
-    }
-  }
-}
-Cypress.Commands.add('createNewFile', (path: string, fileName: string) => {
-  cy.openFolder(path);
-  //@ts-ignore
-  cy.findExplorerTreeNode(path.split('/').pop()).type('{alt}{n}');
-  cy.get(Theia.dialogInput).type(`${fileName}{enter}`);
-  cy.findExplorerTreeNode(fileName);
-});
+// declare global {
+//   namespace Cypress {
+//     interface Chainable<Subject> {
+//       /**
+//        * Create new file in given path.
+//        *
+//        * @example cy.createNewFile('.copybooks/profile', 'COPYBOOK.cpy')
+//        */
+//       createNewFile(path: string, fileName: string): Chainable<any>;
+//     }
+//   }
+// }
+// Cypress.Commands.add('createNewFile', (path: string, fileName: string) => {
+//   cy.openFolder(path);
+//   //@ts-ignore
+//   cy.findExplorerTreeNode(path.split('/').pop()).type('{alt}{n}');
+//   cy.get(IDE.dialogInput).type(`${fileName}{enter}`);
+//   cy.findExplorerTreeNode(fileName);
+// });
 
 declare global {
   namespace Cypress {
@@ -194,9 +204,13 @@ declare global {
   }
 }
 Cypress.Commands.add('openFile', (fileName: string) => {
-  cy.findExplorerTreeNode(fileName).click({ force: true });
-  cy.get(`[id^="shell-tab"][title*="${fileName}"]`);
-  cy.get(Theia.loadSpinner).should('not.exist');
+  cy.wait(500).findExplorerTreeNode(fileName).dblclick({ force: true });
+  if (IDE === Theia) {
+    cy.get(`[id^="shell-tab"][title*="${fileName}"]`);
+    cy.get(Theia.loadSpinner).should('not.exist');
+  } else {
+    cy.get(`[data-resource-name="${fileName}"]`);
+  }
 });
 
 declare global {
@@ -214,8 +228,10 @@ declare global {
 }
 Cypress.Commands.add('openFilePermanent', (fileName: string) => {
   cy.findExplorerTreeNode(fileName).click({ force: true }).dblclick({ force: true });
-  cy.get(Theia.tabOpened + `[id*="${fileName}"]`);
-  cy.get(Theia.loadSpinner).should('not.exist');
+  cy.get(IDE.tabOpened + `[id*="${fileName}"]`);
+  if (IDE === Theia) {
+    cy.get(Theia.loadSpinner).should('not.exist');
+  }
 });
 
 declare global {
@@ -232,16 +248,21 @@ declare global {
 }
 Cypress.Commands.add('deleteFile', (fileName: string) => {
   cy.findExplorerTreeNode(fileName).type('{del}');
-  cy.get(Theia.dialogTitle)
-    .contains('Delete File')
-    .parent()
-    .siblings(Theia.dialogContent)
-    .contains(fileName)
-    .parent()
-    .siblings(Theia.dialogControl)
-    .find('button' + Theia.theiaButtonOK)
-    .contains('OK')
-    .click({ force: true });
+  if (IDE === Theia) {
+    cy.get(IDE.dialogTitle)
+      .contains('Delete File')
+      .parent()
+      .siblings(IDE.dialogContent)
+      .contains(fileName)
+      .parent()
+      .siblings(IDE.dialogControl)
+      .find('button' + IDE.theiaButtonOK)
+      .contains('OK')
+      .click({ force: true });
+  } else {
+    cy.get(IDE.dialogContent).contains(fileName);
+    cy.get(IDE.dialogControl).find(VSCODE.button).contains('Delete').click({ force: true });
+  }
 });
 
 declare global {
@@ -255,7 +276,11 @@ declare global {
   }
 }
 Cypress.Commands.add('getCurrentTab', () => {
-  cy.get(Theia.currentTab);
+  if (IDE === VSCODE) {
+    cy.get(IDE.currentTab).eq(0);
+  } else {
+    cy.get(IDE.currentTab);
+  }
 });
 
 declare global {
@@ -269,7 +294,17 @@ declare global {
   }
 }
 Cypress.Commands.add('closeCurrentTab', () => {
-  cy.getCurrentTab().find(Theia.tabCloseButton).click({ force: true });
+  if (IDE == Theia) {
+    cy.getCurrentTab().find(Theia.tabCloseButton).click({ force: true });
+  } else {
+    cy.getCurrentTab().wait(500).rightclick();
+    cy.wait(500).get('[aria-label="Close All"]').click({ force: true });
+    cy.get('body').then(($body) => {
+      if ($body.find(VSCODE.buttonDontSave).length > 0) {
+        cy.get(VSCODE.buttonDontSave).click({ force: true });
+      }
+    });
+  }
 });
 
 declare global {
@@ -285,8 +320,16 @@ declare global {
   }
 }
 Cypress.Commands.add('goToLine', (lineNumber: number) => {
-  cy.get('#theia-main-content-panel .theia-editor').not(Theia.modHidden).not(Theia.bottomContentPanel).type('{ctrl}g');
-  cy.get(Theia.typeALineNumber).type(`${lineNumber}{enter}`, {
+  if (IDE === Theia) {
+    cy.get('#theia-main-content-panel .theia-editor')
+      .not(Theia.modHidden)
+      .not(Theia.bottomContentPanel)
+      .type('{ctrl}g');
+  } else {
+    cy.get(VSCODE.mainContentPanel).wait(500).type('{ctrl}g');
+  }
+
+  cy.get(IDE.typeALineNumber).type(`${lineNumber}{enter}`, {
     delay: 100,
   });
   cy.getCurrentLineNumber().should('eq', lineNumber);
@@ -305,7 +348,7 @@ declare global {
   }
 }
 Cypress.Commands.add('selectLangMode', () => {
-  cy.get(Theia.languageMode);
+  cy.get(IDE.languageMode);
 });
 
 declare global {
@@ -338,7 +381,7 @@ declare global {
 }
 Cypress.Commands.add('getLineByNumber', (lineNumber: number) => {
   cy.goToLine(lineNumber);
-  cy.get(Theia.lineNumber)
+  cy.get(IDE.lineNumber)
     .contains(RegExp(`^${lineNumber}$`))
     .parent()
     .should('have.css', 'top')
@@ -368,7 +411,11 @@ declare global {
   }
 }
 Cypress.Commands.add('getMainEditor', () => {
-  cy.get(Theia.mainContentPanel + ' ' + Theia.editor).not(Theia.modHidden);
+  if (IDE === Theia) {
+    cy.get(Theia.mainContentPanel + ' ' + Theia.editor).not(Theia.modHidden);
+  } else {
+    cy.get(VSCODE.mainContentPanel);
+  }
 });
 
 declare global {
@@ -384,7 +431,7 @@ declare global {
   }
 }
 Cypress.Commands.add('getPreviewEditor', () => {
-  cy.get(Theia.peekViewWidget);
+  cy.get(IDE.peekViewWidget);
 });
 
 declare global {
@@ -400,7 +447,7 @@ declare global {
   }
 }
 Cypress.Commands.add('findCurrentLineOverlay', { prevSubject: true }, (editor) => {
-  cy.wrap(editor).find(Theia.currentLine).parent();
+  cy.wrap(editor).find(IDE.currentLine).parent();
 });
 
 declare global {
@@ -462,7 +509,7 @@ Cypress.Commands.add('getCurrentLineNumber', () => {
     .then((top: any) => {
       //cy.get('@editor').find('.line-numbers').parent(`[style*="top:${top}"]`).invoke('text').then(parseFloat);
       cy.get('@editor')
-        .find(Theia.lineNumber)
+        .find(IDE.lineNumber)
         .then(($lineNumbers) => {
           //@ts-ignore
           const $number = $lineNumbers.filter((i, number) => {
@@ -494,7 +541,7 @@ Cypress.Commands.add('getPreviewCurrentLineNumber', () => {
     //@ts-ignore
     .findCurrentLineTop()
     .then((top) => {
-      cy.get('@previewEditor').find(Theia.lineNumber).parent(`[style*="top:${top}"]`).invoke('text').then(parseFloat);
+      cy.get('@previewEditor').find(IDE.lineNumber).parent(`[style*="top:${top}"]`).invoke('text').then(parseFloat);
     });
 });
 
@@ -531,9 +578,9 @@ Cypress.Commands.add(
   'getCurrentLineErrors',
   ({ expectedLine, errorType = 'error' }: { expectedLine: number; errorType: string }) => {
     const errorTypes = {
-      info: Theia.editorInfo,
-      warning: Theia.editorWarn,
-      error: Theia.editorError,
+      info: IDE.editorInfo,
+      warning: IDE.editorWarn,
+      error: IDE.editorError,
     };
     // Wait until any errors parsed at all
     //@ts-ignore
@@ -561,14 +608,19 @@ declare global {
      * @example cy.getHoverErrorMessage()
                 .contains("ABC: Copybook not foundCOBOL Language Support - E(MISSING_COPYBOOK)");
     */
-      getHoverErrorMessage($error: Element): Chainable<any>;
+      getHoverErrorMessage($error: Element, $text: string): Chainable<any>;
     }
   }
 }
-Cypress.Commands.add('getHoverErrorMessage', { prevSubject: true }, ($error: Element) => {
-  //@ts-ignore
-  cy.getCurrentLine().trigger('mousemove', $error[0].offsetLeft, $error[0].offsetTop);
-  cy.get(Theia.hoverOverContent);
+Cypress.Commands.add('getHoverErrorMessage', { prevSubject: true }, ($error: Element, text: string) => {
+  if (IDE === Theia) {
+    //@ts-ignore
+    cy.getCurrentLine().trigger('mousemove', $error[0].offsetLeft, $error[0].offsetTop);
+  } else {
+    //@ts-ignore
+    cy.getCurrentLine().findText(text).realHover({ position: 'center' });
+  }
+  cy.get(IDE.hoverOverContent);
 });
 
 declare global {
@@ -588,7 +640,7 @@ Cypress.Commands.add('getElementLineNumber', { prevSubject: true }, (subject: Cy
     .parent()
     .should('have.css', 'top')
     .then((top) => {
-      cy.get(Theia.lineNumber).parent(`[style*="top:${top}"]`).invoke('text').then(parseFloat);
+      cy.get(IDE.lineNumber).parent(`[style*="top:${top}"]`).invoke('text').then(parseFloat);
     });
 });
 
@@ -623,8 +675,13 @@ declare global {
   }
 }
 Cypress.Commands.add('goToDefinition', { prevSubject: true }, ($subject: Cypress.Chainable<Element>) => {
-  cy.wrap($subject).wait(1000).rightclick().wait(2000); // wait for onClickListeneres to be set
-  cy.get('.p-Widget.p-Menu').find(Theia.goToDefinition).click({ force: true }).wait(500);
+  if (IDE === Theia) {
+    cy.wrap($subject).wait(1000).rightclick().wait(2000); // wait for onClickListeneres to be set
+    cy.get('.p-Widget.p-Menu').find(IDE.goToDefinition).click({ force: true }).wait(500);
+  } else {
+    cy.wrap($subject).wait(1000).rightclick();
+    cy.get('.shadow-root-host').shadow().find('.action-label').contains('Go to Definition').click();
+  }
 });
 
 declare global {
@@ -642,7 +699,11 @@ declare global {
 }
 Cypress.Commands.add('goToReferences', { prevSubject: true }, ($subject: Cypress.Chainable<Element>) => {
   cy.wrap($subject).wait(1000).rightclick({ force: true }).wait(2000); // wait for onClickListeneres to be set
-  cy.get('.p-Widget.p-Menu').find(Theia.goToReference).click();
+  if (IDE === Theia) {
+    cy.get('.p-Widget.p-Menu').find(Theia.goToReference).click();
+  } else {
+    cy.get('.shadow-root-host').shadow().find('.action-label').contains('Go to References').click();
+  }
 });
 
 declare global {
@@ -659,11 +720,16 @@ declare global {
   }
 }
 Cypress.Commands.add('formatDocument', () => {
-  cy.get(Theia.mainContentPanel + ' ' + Theia.editor)
-    .wait(1000)
-    .rightclick()
-    .wait(2000); // wait for onClickListeneres to be set
-  cy.get('.p-Widget.p-Menu').find(Theia.formatDocument).click();
+  if (IDE === Theia) {
+    cy.get(Theia.mainContentPanel + ' ' + Theia.editor)
+      .wait(1000)
+      .rightclick()
+      .wait(2000); // wait for onClickListeneres to be set
+    cy.get('.p-Widget.p-Menu').find(IDE.formatDocument).click();
+  } else {
+    cy.get(VSCODE.mainContentPanel).wait(1000).rightclick().wait(2000); // wait for onClickListeneres to be set
+    cy.get('.shadow-root-host').shadow().find('.action-label').contains('Format Document').click();
+  }
 });
 
 declare global {
@@ -688,61 +754,61 @@ Cypress.Commands.add('hideSourceView', () => {
   });
 });
 
-declare global {
-  namespace Cypress {
-    interface Chainable<Subject> {
-      /**
-       * Opens Outline view. And do nothing if the view is already opened.
-       * @example cy.openOutlineView()
-       */
-      openOutlineView(): void;
-    }
-  }
-}
-Cypress.Commands.add('openOutlineView', () => {
-  cy.get(Theia.outlineViewTab).then(($btn) => {
-    if (!$btn.hasClass(Theia.modCurrent)) {
-      cy.get(Theia.outlineViewTab).click();
-    }
-  });
-});
+// declare global {
+//   namespace Cypress {
+//     interface Chainable<Subject> {
+//       /**
+//        * Opens Outline view. And do nothing if the view is already opened.
+//        * @example cy.openOutlineView()
+//        */
+//       openOutlineView(): void;
+//     }
+//   }
+// }
+// Cypress.Commands.add('openOutlineView', () => {
+//   cy.get(IDE.outlineViewTab).then(($btn) => {
+//     if (!$btn.hasClass(IDE.modCurrent)) {
+//       cy.get(IDE.outlineViewTab).click();
+//     }
+//   });
+// });
 
-declare global {
-  namespace Cypress {
-    interface Chainable<Subject> {
-      /**
-       * Expands the element in Outline view.
-       * @example cy.expandOutlineElement('DATA DIVISION')
-       */
-      expandOutlineElement(elementName: string): void;
-    }
-  }
-}
-Cypress.Commands.add('expandOutlineElement', (elementName: string) => {
-  cy.getOutlineViewTreeContainer()
-    .get(Theia.treeNodeSegment)
-    .contains(elementName)
-    .as('element')
-    .then(($element) => {
-      if ($element.siblings(Theia.collapsed).length) {
-        cy.wrap($element).click({ force: true });
-        cy.get('@element').siblings().should('not.have.class', Theia.collapsed);
-      }
-    });
-});
+// declare global {
+//   namespace Cypress {
+//     interface Chainable<Subject> {
+//       /**
+//        * Expands the element in Outline view.
+//        * @example cy.expandOutlineElement('DATA DIVISION')
+//        */
+//       expandOutlineElement(elementName: string): void;
+//     }
+//   }
+// }
+// Cypress.Commands.add('expandOutlineElement', (elementName: string) => {
+//   cy.getOutlineViewTreeContainer()
+//     .get(IDE.treeNodeSegment)
+//     .contains(elementName)
+//     .as('element')
+//     .then(($element) => {
+//       if ($element.siblings(IDE.collapsed).length) {
+//         cy.wrap($element).click({ force: true });
+//         cy.get('@element').siblings().should('not.have.class', IDE.collapsed);
+//       }
+//     });
+// });
 
-declare global {
-  namespace Cypress {
-    interface Chainable<Subject> {
-      /**
-       * Returns the tree container from Outline view.
-       * @example cy.getOutlineViewTreeContainer()
-       */
-      getOutlineViewTreeContainer(): Chainable<any>;
-    }
-  }
-}
-Cypress.Commands.add('getOutlineViewTreeContainer', (): any => cy.get(Theia.outlineView).get(Theia.treeContainer));
+// declare global {
+//   namespace Cypress {
+//     interface Chainable<Subject> {
+//       /**
+//        * Returns the tree container from Outline view.
+//        * @example cy.getOutlineViewTreeContainer()
+//        */
+//       getOutlineViewTreeContainer(): Chainable<any>;
+//     }
+//   }
+// }
+// Cypress.Commands.add('getOutlineViewTreeContainer', (): any => cy.get(IDE.outlineView).get(IDE.treeContainer));
 
 declare global {
   namespace Cypress {

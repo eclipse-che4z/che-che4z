@@ -19,4 +19,4 @@ import './debug';
 import './flow';
 import './zowe';
 import './symdump';
-import './selectorsTheia';
+import './selectors';

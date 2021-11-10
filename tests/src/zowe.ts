@@ -15,7 +15,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
 /// <reference types="cypress" />
-import { Theia, ZOWE } from './selectorsTheia';
+import { Theia, ZOWE } from './selectors';
 
 declare global {
   /**

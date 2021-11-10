@@ -17,7 +17,7 @@
 /// <reference types="cypress" />
 
 import { USER, PASS } from './cypressEnv';
-import { Theia, E4E } from './selectorsTheia';
+import { Theia, E4E } from './selectors';
 
 declare global {
   /**
