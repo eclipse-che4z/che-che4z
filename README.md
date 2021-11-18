@@ -17,7 +17,7 @@ The Che4z basic stack is included with Eclipse Che version 7.6.0 and above, so n
 
 To install the Che4z [premium stack](https://techdocs.broadcom.com/us/en/ca-mainframe-software/devops/ca-brightside/3-0/eclipse-che4z-premium-stack.html), **follow these steps**: 
 
-1. Open a [CA Brightside Support Ticket](https://support.broadcom.com/mainframe-software/product-page.html?productName=CA%20Brightside) to obtain the devfile URL for the Che4z premium stack.
+1. Open a [Brightside Support Ticket](https://support.broadcom.com/mainframe-software/product-page.html?productName=CA%20Brightside) to obtain the devfile URL for the Che4z premium stack.
 
 2. Once you receive the URL, log in to Eclipse Che.
 
