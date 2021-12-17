@@ -15,7 +15,7 @@
 
 /// <reference types="cypress" />
 
-import { Theia, COBOLLS } from './selectorsTheia';
+import { Theia, COBOLLS } from './selectors';
 
 declare global {
   /**

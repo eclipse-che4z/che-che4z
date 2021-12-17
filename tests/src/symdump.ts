@@ -17,7 +17,7 @@
 /// <reference types="cypress" />
 
 import { PASS, USER, SYMDUMPHOST, SYMDUMPPASSWD, SYMDUMPPORT } from './cypressEnv';
-import { Theia, AA4MF } from './selectorsTheia';
+import { Theia, AA4MF } from './selectors';
 
 declare global {
   /**
