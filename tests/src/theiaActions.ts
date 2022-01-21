@@ -141,6 +141,8 @@ Cypress.Commands.add('openFolder', (path: string) => {
             cy.wrap($folder).click({ force: true });
             cy.get('@folder').siblings().should('not.have.class', theiaModwoDot);
           }
+        } else {
+          cy.wrap($folder).click({ force: true });
         }
       });
   });
@@ -165,30 +167,32 @@ Cypress.Commands.add('closeFolder', (path: string) => {
       .as('folder')
       .then(($folder) => {
         cy.wrap($folder).click({ force: true });
-        cy.get('@folder').siblings().should('have.class', theiaModwoDot);
+        if (IDE === Theia) {
+          cy.get('@folder').siblings().should('have.class', theiaModwoDot);
+        }
       });
   });
 });
 
-// declare global {
-//   namespace Cypress {
-//     interface Chainable<Subject> {
-//       /**
-//        * Create new file in given path.
-//        *
-//        * @example cy.createNewFile('.copybooks/profile', 'COPYBOOK.cpy')
-//        */
-//       createNewFile(path: string, fileName: string): Chainable<any>;
-//     }
-//   }
-// }
-// Cypress.Commands.add('createNewFile', (path: string, fileName: string) => {
-//   cy.openFolder(path);
-//   //@ts-ignore
-//   cy.findExplorerTreeNode(path.split('/').pop()).type('{alt}{n}');
-//   cy.get(IDE.dialogInput).type(`${fileName}{enter}`);
-//   cy.findExplorerTreeNode(fileName);
-// });
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Create new file in given path.
+       *
+       * @example cy.createNewFile('.copybooks/profile', 'COPYBOOK.cpy')
+       */
+      createNewFile(path: string, fileName: string): Chainable<any>;
+    }
+  }
+}
+Cypress.Commands.add('createNewFile', (path: string, fileName: string) => {
+  cy.openFolder(path);
+  //@ts-ignore
+  cy.findExplorerTreeNode(path.split('/').pop()).type('{alt}{n}');
+  cy.get(IDE.dialogInput).type(`${fileName}{enter}`);
+  cy.findExplorerTreeNode(fileName);
+});
 
 declare global {
   namespace Cypress {
@@ -754,61 +758,65 @@ Cypress.Commands.add('hideSourceView', () => {
   });
 });
 
-// declare global {
-//   namespace Cypress {
-//     interface Chainable<Subject> {
-//       /**
-//        * Opens Outline view. And do nothing if the view is already opened.
-//        * @example cy.openOutlineView()
-//        */
-//       openOutlineView(): void;
-//     }
-//   }
-// }
-// Cypress.Commands.add('openOutlineView', () => {
-//   cy.get(IDE.outlineViewTab).then(($btn) => {
-//     if (!$btn.hasClass(IDE.modCurrent)) {
-//       cy.get(IDE.outlineViewTab).click();
-//     }
-//   });
-// });
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Opens Outline view. And do nothing if the view is already opened.
+       * @example cy.openOutlineView()
+       */
+      openOutlineView(): void;
+    }
+  }
+}
+Cypress.Commands.add('openOutlineView', () => {
+  cy.get(IDE.outlineViewTab).then(($btn) => {
+    if (!$btn.hasClass(IDE.modCurrent)) {
+      cy.get(IDE.outlineViewTab).click();
+    }
+  });
+});
 
-// declare global {
-//   namespace Cypress {
-//     interface Chainable<Subject> {
-//       /**
-//        * Expands the element in Outline view.
-//        * @example cy.expandOutlineElement('DATA DIVISION')
-//        */
-//       expandOutlineElement(elementName: string): void;
-//     }
-//   }
-// }
-// Cypress.Commands.add('expandOutlineElement', (elementName: string) => {
-//   cy.getOutlineViewTreeContainer()
-//     .get(IDE.treeNodeSegment)
-//     .contains(elementName)
-//     .as('element')
-//     .then(($element) => {
-//       if ($element.siblings(IDE.collapsed).length) {
-//         cy.wrap($element).click({ force: true });
-//         cy.get('@element').siblings().should('not.have.class', IDE.collapsed);
-//       }
-//     });
-// });
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Expands the element in Outline view.
+       * @example cy.expandOutlineElement('DATA DIVISION')
+       */
+      expandOutlineElement(elementName: string): void;
+    }
+  }
+}
+Cypress.Commands.add('expandOutlineElement', (elementName: string) => {
+  cy.getOutlineViewTreeContainer()
+    .get(IDE.treeNodeSegment)
+    .contains(elementName)
+    .as('element')
+    .then(($element) => {
+      if (IDE === Theia) {
+        if ($element.siblings(IDE.collapsed).length) {
+          cy.wrap($element).click({ force: true });
+          cy.get('@element').siblings().should('not.have.class', IDE.collapsed);
+        }
+      } else {
+        cy.wrap($element).click({ force: true });
+      }
+    });
+});
 
-// declare global {
-//   namespace Cypress {
-//     interface Chainable<Subject> {
-//       /**
-//        * Returns the tree container from Outline view.
-//        * @example cy.getOutlineViewTreeContainer()
-//        */
-//       getOutlineViewTreeContainer(): Chainable<any>;
-//     }
-//   }
-// }
-// Cypress.Commands.add('getOutlineViewTreeContainer', (): any => cy.get(IDE.outlineView).get(IDE.treeContainer));
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Returns the tree container from Outline view.
+       * @example cy.getOutlineViewTreeContainer()
+       */
+      getOutlineViewTreeContainer(): Chainable<any>;
+    }
+  }
+}
+Cypress.Commands.add('getOutlineViewTreeContainer', (): any => cy.get(IDE.outlineView).get(IDE.treeContainer));
 
 declare global {
   namespace Cypress {
@@ -825,7 +833,9 @@ declare global {
 }
 Cypress.Commands.add('updateConfigs', (expression: string) => {
   cy.readFile(`test_files/project/settings/${expression}.json`).then((content) => {
-    cy.writeFile('test_files/project/.theia/settings.json', content);
     cy.writeFile('test_files/project/.vscode/settings.json', content);
+    if (IDE === Theia) {
+      cy.writeFile('test_files/project/.theia/settings.json', content);
+    }
   });
 });

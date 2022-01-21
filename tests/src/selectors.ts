@@ -119,6 +119,7 @@ export const Theia = {
 };
 
 export const VSCODE = {
+  dialogInput: 'div.dialogBlock input.theia-input',
   mainContentPanel: 'body',
   preLoad: '',
   leftRightPanel: '.split-view-container',
@@ -143,11 +144,17 @@ export const VSCODE = {
   dialogContent: '.dialog-message-text',
   dialogControl: '.dialog-buttons-row',
   button: '.monaco-button.monaco-text-button',
+  lineContent: '.view-line',
   linesContent: '.view-lines',
-  treeContainer: '.theia-TreeContainer',
+  treeContainer: '.pane-body.outline-pane',
   outLine: '[title="Outline"]',
   outlineMsg: '.outline-message',
   documentation: '.monaco-scrollable-element .docs',
+  suggestWidget: '[widgetid="editor.widget.suggestWidget"]',
+  outlineViewTab: '[aria-label="Outline Section"]',
+  outlineView: '.outline-pane',
+  modCurrent: '.expanded',
+  treeNodeSegment: '.theia-TreeNodeSegment',
 };
 
 export const COBOLLS = {
