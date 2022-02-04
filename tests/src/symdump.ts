@@ -16,8 +16,12 @@
 
 /// <reference types="cypress" />
 
-import { PASS, USER, SYMDUMPHOST, SYMDUMPPASSWD, SYMDUMPPORT } from './cypressEnv';
-import { Theia, AA4MF } from './selectors';
+import { USER, PASS, SYMDUMPHOST, SYMDUMPPASSWD, SYMDUMPPORT } from './cypressEnv';
+import { Theia, VSCODE, AA4MF_Theia, AA4MF_VSC } from './selectors';
+
+const env = Cypress.env('ide');
+const IDE = env === 'theia' ? Theia : VSCODE;
+const AA4MF = env === 'theia' ? AA4MF_Theia : AA4MF_VSC;
 
 declare global {
   /**
@@ -37,7 +41,7 @@ declare global {
   }
 }
 Cypress.Commands.add('newConnection', () => {
-  cy.get(AA4MF.newConnection).click();
+  cy.get(AA4MF.newConnection).click({ force: true });
 });
 
 declare global {
@@ -53,7 +57,7 @@ declare global {
   }
 }
 Cypress.Commands.add('entryField', () => {
-  cy.get(Theia.inputF1);
+  cy.get(IDE.inputF1);
 });
 
 declare global {
@@ -69,7 +73,7 @@ declare global {
   }
 }
 Cypress.Commands.add('validationMsg', (message) => {
-  cy.get(Theia.openTree).contains(message);
+  cy.get(IDE.openTree).contains(message);
 });
 
 declare global {
@@ -123,17 +127,9 @@ Cypress.Commands.add('symDumpAddNewConnection', (profileName) => {
     .type(profileName, { delay: 50 })
     .type('{enter}')
     .wait(500)
-    .type(`${SYMDUMPHOST}:${SYMDUMPPORT}`, { delay: 50 })
-    .type('{enter}');
+    .type(`${SYMDUMPHOST}:${SYMDUMPPORT}`, { delay: 50 });
   cy.get('@quickOpen').type(USER, { delay: 50 }).type('{enter}');
-  cy.get('@quickOpen')
-    .type(SYMDUMPPASSWD, { log: false, delay: 50 })
-    .then(($input) => {
-      if ($input.val() !== SYMDUMPPASSWD) {
-        throw new Error('Different value of typed password');
-      }
-    })
-    .type('{enter}');
+  cy.get('@quickOpen').type(SYMDUMPPASSWD, { log: false, delay: 50 });
   cy.connectionName(profileName);
 });
 
@@ -150,7 +146,7 @@ declare global {
   }
 }
 Cypress.Commands.add('connectionName', (profileName) => {
-  cy.get('.noWrapInfoTree').contains(profileName);
+  cy.get(AA4MF.treeView).contains(profileName);
 });
 
 declare global {
@@ -182,20 +178,35 @@ declare global {
   }
 }
 Cypress.Commands.add('deleteSymDumpConnectionDefault', (profileName) => {
-  cy.openSymDump().wait(1000);
-  cy.get(AA4MF.symdumpId).then(($connection) => {
-    if ($connection.find(`[id="/0:${profileName}"]`).length) {
-      cy.symDumpPanel().type('{pageup}').type('{pageup}');
-      cy.clickOnConnectionName(profileName).rightclick();
-      cy.get(AA4MF.deleteConnection).click();
-      cy.get(Theia.dialogControl)
-        .find('button' + Theia.theiaButtonOK)
-        .contains('OK')
-        .click({ force: true });
-    } else {
-      console.log('Nothing to delete');
-    }
-  });
+  if (IDE === Theia) {
+    cy.openSymDump().wait(1000);
+    cy.get(AA4MF.symdumpId).then(($connection) => {
+      if ($connection.find(`[id="/0:${profileName}"]`).length) {
+        cy.symDumpPanel().type('{pageup}').type('{pageup}');
+        cy.clickOnConnectionName(profileName).rightclick();
+        cy.get(AA4MF.deleteConnection).click();
+        cy.get(Theia.dialogControl)
+          .find('button' + IDE.theiaButtonOK)
+          .contains('OK')
+          .click({ force: true });
+      } else {
+        console.log('Nothing to delete');
+      }
+    });
+  } else {
+    cy.get(AA4MF.symdumpId)
+      .wait(5000)
+      .then(($connection) => {
+        if ($connection.find('[id="list_id_2_0"]').length) {
+          // cy.symDumpPanel().type('{pageup}').type('{pageup}');
+          cy.clickOnConnectionName(profileName).rightclick();
+          cy.get(AA4MF.deleteConnection).click();
+          cy.get(IDE.theiaButtonOK).click({ force: true });
+        } else {
+          console.log('Nothing to delete');
+        }
+      });
+  }
 });
 
 declare global {
@@ -258,7 +269,11 @@ declare global {
   }
 }
 Cypress.Commands.add('dataSet', (DSNAME) => {
-  cy.get(Theia.treeNodeSegment + `[title*="${DSNAME}"]`);
+  if (IDE === Theia) {
+    cy.get(Theia.treeNodeSegment + `[title*="${DSNAME}"]`);
+  } else {
+    cy.get('[id="list_id_2_2"]');
+  }
 });
 
 declare global {
@@ -274,7 +289,11 @@ declare global {
   }
 }
 Cypress.Commands.add('jobDump', (jobName) => {
-  cy.get(`[title*="Job=${jobName}"]`);
+  if (IDE === Theia) {
+    cy.get(`[title*="Job=${jobName}"]`);
+  } else {
+    cy.get(`[aria-label*="Job=${jobName}"]`);
+  }
 });
 
 declare global {
@@ -322,7 +341,7 @@ declare global {
   }
 }
 Cypress.Commands.add('missingDumpMessage', (message) => {
-  cy.get(Theia.popUpMsg).should('contain', message);
+  cy.get(IDE.popUpMsg).should('contain', message);
 });
 
 declare global {
@@ -540,10 +559,15 @@ declare global {
   }
 }
 Cypress.Commands.add('openSettingsSymDump', () => {
-  cy.get(Theia.menuBar).get(Theia.menuBarContent).contains('File').click();
-  cy.get('[data-type="submenu"]').click();
-  cy.get('.p-Menu-itemLabel').contains('Open Preferences').click();
-  cy.get('input.settings-search-input.theia-input').type('symdump');
+  if (IDE === Theia) {
+    cy.get(Theia.menuBar).get(Theia.menuBarContent).contains('File').click();
+    cy.get('[data-type="submenu"]').click();
+    cy.get('.p-Menu-itemLabel').contains('Open Preferences').click();
+    cy.get('input.settings-search-input.theia-input').type('symdump');
+  } else {
+    cy.get('body').type('{ctrl},');
+    cy.get('[data-mode-id="plaintext"]').type('symdump');
+  }
 });
 
 declare global {
@@ -559,7 +583,11 @@ declare global {
   }
 }
 Cypress.Commands.add('PROTSYM', () => {
-  cy.get('[title*="PROTSYMS"]');
+  if (IDE === Theia) {
+    cy.get('[title*="PROTSYMS"]');
+  } else {
+    cy.get('#list_id_2_1');
+  }
 });
 
 declare global {
@@ -575,10 +603,18 @@ declare global {
   }
 }
 Cypress.Commands.add('addProtsym', (protsym) => {
-  cy.PROTSYM().trigger('mousedown').click();
-  cy.get('[title*="Add PROTSYM"]').click();
-  cy.entryField().type(`${protsym}{enter}`);
-  cy.get(`[title*="${protsym}"]`);
+  if (IDE === Theia) {
+    cy.PROTSYM().trigger('mousedown').click();
+    cy.get('[title*="Add PROTSYM"]').click();
+    cy.entryField().type(`${protsym}{enter}`);
+    cy.get(`[title*="${protsym}"]`);
+  } else {
+    cy.PROTSYM().trigger('mousedown').click();
+    cy.get('[title*="Add PROTSYM"]').click();
+    cy.entryField().type(`${protsym}{enter}`);
+    cy.PROTSYM().click();
+    cy.get(`[aria-label*="${protsym}"]`);
+  }
 });
 
 declare global {
@@ -597,7 +633,11 @@ Cypress.Commands.add('addProtsymRightClick', (protsym) => {
   cy.PROTSYM().rightclick();
   cy.get(AA4MF.addProtsym).contains('Add PROTSYM').click();
   cy.entryField().type(`${protsym}{enter}`);
-  cy.get(`[title*="${protsym}"]`);
+  if (IDE === Theia) {
+    cy.get(`[title*="${protsym}"]`);
+  } else {
+    cy.get('[id="list_id_2_3"]').contains(protsym);
+  }
 });
 
 declare global {
