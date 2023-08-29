@@ -1,0 +1,47 @@
+# Third-party Content
+
+## cypress-iframe@npm:1.0.1
+License: MIT
+Homepage: https://gitlab.com/kgroat/cypress-iframe#readme
+
+## cypress-xpath@npm:1.6.2
+License: MIT
+Homepage: https://github.com/cypress-io/cypress-xpath#readme
+
+## cypress@npm:7.1.0
+License: MIT
+Homepage: https://github.com/cypress-io/cypress
+
+## eslint-config-prettier@npm:6.15.0
+License: MIT
+
+## eslint-plugin-cypress@npm:2.11.2
+License: MIT
+Homepage: https://github.com/cypress-io/eslint-plugin-cypress#readme
+
+## eslint-plugin-prettier@npm:3.4.0
+License: MIT
+Homepage: https://github.com/prettier/eslint-plugin-prettier#readme
+
+## eslint@npm:7.24.0
+License: MIT
+Homepage: https://eslint.org
+
+## husky@npm:4.3.8
+License: MIT
+Homepage: https://github.com/typicode/husky#readme
+
+## lint-staged@npm:10.5.4
+License: MIT
+
+## prettier@npm:2.2.1
+License: MIT
+Homepage: https://prettier.io
+
+## typescript@patch:typescript@npm%3A4.2.4#~builtin<compat/typescript>::version=4.2.4&hash=701156
+License: Apache-2.0
+Homepage: https://www.typescriptlang.org/
+
+## yarn-lockfile@npm:1.1.1
+License: Unlicense
+Homepage: https://github.com/wmhilton/yarn-lockfile#readme
